@@ -173,9 +173,17 @@ export default function App(){
   const [view,setView]=useState("list");
   const [statusFilter,setStatusFilter]=useState("All");
   const [intownOnly,setIntownOnly]=useState(false);
+  const [alertAddress,setAlertAddress]=useState("");
   const [alertEmail,setAlertEmail]=useState("");
+  const [alertPhone,setAlertPhone]=useState("");
   const [alertRadius,setAlertRadius]=useState("0.5");
+  const [alertTypes,setAlertTypes]=useState({
+    newFiling:true, statusChange:true, hearingReminder:true,
+    demolition:true, newComment:false,
+  });
   const [alertSaved,setAlertSaved]=useState(false);
+  const [alertError,setAlertError]=useState("");
+  const [alertSaving,setAlertSaving]=useState(false);
   const [commentText,setCommentText]=useState("");
   const [commentSentiment,setCommentSentiment]=useState("neutral");
   const [exportMsg,setExportMsg]=useState("");
@@ -654,7 +662,7 @@ export default function App(){
             </div>
             <div className="card" style={{padding:"20px",marginBottom:16}}>
               <div style={{fontWeight:600,fontSize:14,marginBottom:14}}>📍 Your Address</div>
-              <input className="input" placeholder="Enter your address in Macon, GA..." defaultValue="" style={{marginBottom:12}}/>
+              <input className="input" placeholder="Enter your address in Macon, GA..." value={alertAddress} onChange={e=>setAlertAddress(e.target.value)} style={{marginBottom:12}}/>
               <div style={{color:"#6B7280",fontSize:11,fontWeight:600,textTransform:"uppercase",letterSpacing:".8px",marginBottom:8}}>Alert Radius</div>
               <div style={{display:"flex",gap:8,marginBottom:14}}>
                 {["0.25","0.5","1.0","2.0"].map(r=>(
@@ -673,26 +681,48 @@ export default function App(){
               <div style={{fontWeight:600,fontSize:14,marginBottom:14}}>📧 Email Alerts</div>
               <input className="input" type="email" placeholder="your@email.com" value={alertEmail} onChange={e=>setAlertEmail(e.target.value)} style={{marginBottom:12}}/>
               {[
-                {l:"New applications filed within my radius",c:true},
-                {l:"Status changes on nearby permits",c:true},
-                {l:"Upcoming hearing dates (48hr reminder)",c:true},
-                {l:"Demolition permit applications (immediate)",c:true},
-                {l:"New comments on applications I follow",c:false},
-              ].map(({l,c})=>(
-                <label key={l} style={{display:"flex",alignItems:"center",gap:10,cursor:"pointer",marginBottom:10}}>
-                  <input type="checkbox" defaultChecked={c} style={{accentColor:"#4F6BFF",width:15,height:15}}/>
+                {k:"newFiling",l:"New applications filed within my radius"},
+                {k:"statusChange",l:"Status changes on nearby permits"},
+                {k:"hearingReminder",l:"Upcoming hearing dates (48hr reminder)"},
+                {k:"demolition",l:"Demolition permit applications (immediate)"},
+                {k:"newComment",l:"New comments on applications I follow"},
+              ].map(({k,l})=>(
+                <label key={k} style={{display:"flex",alignItems:"center",gap:10,cursor:"pointer",marginBottom:10}}>
+                  <input type="checkbox" checked={alertTypes[k]} onChange={e=>setAlertTypes(prev=>({...prev,[k]:e.target.checked}))} style={{accentColor:"#4F6BFF",width:15,height:15}}/>
                   <span style={{fontSize:13,color:"#C4C9DC"}}>{l}</span>
                 </label>
               ))}
             </div>
             <div className="card" style={{padding:"20px",marginBottom:16}}>
               <div style={{fontWeight:600,fontSize:14,marginBottom:14}}>📱 Text Alerts</div>
-              <input className="input" type="tel" placeholder="+1 (478) 000-0000" style={{marginBottom:10}}/>
-              <p style={{color:"#4A5068",fontSize:12}}>SMS for urgent filings: demolitions, new construction, and variances in Intown Macon.</p>
+              <input className="input" type="tel" placeholder="+1 (478) 000-0000" value={alertPhone} onChange={e=>setAlertPhone(e.target.value)} style={{marginBottom:10}}/>
+              <p style={{color:"#4A5068",fontSize:12}}>Coming soon — texts aren't sent yet. We'll save your number so it's ready when this launches; email alerts below are live now.</p>
             </div>
-            <button className="btn btn-primary" style={{width:"100%",padding:"11px",fontSize:14}} onClick={()=>{setAlertSaved(true);setTimeout(()=>setAlertSaved(false),3000);}}>
-              Save Alert Preferences
+            <button className="btn btn-primary" style={{width:"100%",padding:"11px",fontSize:14}} disabled={alertSaving} onClick={async()=>{
+              setAlertError("");
+              setAlertSaving(true);
+              try{
+                const r=await fetch("/api/subscribe",{
+                  method:"POST",
+                  headers:{"Content-Type":"application/json"},
+                  body:JSON.stringify({
+                    address:alertAddress, email:alertEmail, phone:alertPhone||null,
+                    radiusMiles:alertRadius, intownOnly, alerts:alertTypes,
+                  }),
+                });
+                const data=await r.json().catch(()=>({}));
+                if(!r.ok)throw new Error(data.error||"Something went wrong. Please try again.");
+                setAlertSaved(true);
+                setTimeout(()=>setAlertSaved(false),4000);
+              }catch(err){
+                setAlertError(err.message||"Something went wrong. Please try again.");
+              }finally{
+                setAlertSaving(false);
+              }
+            }}>
+              {alertSaving?"Saving…":"Save Alert Preferences"}
             </button>
+            {alertError&&<div className="asaved" style={{background:"#3A1B1B",color:"#F87171",borderColor:"#5C2626"}}>⚠️ {alertError}</div>}
             {alertSaved&&<div className="asaved">✅ Alerts active for {intownOnly?"Intown Macon":"all of Macon"} within {alertRadius} miles</div>}
           </div>
         )}
