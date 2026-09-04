@@ -6,6 +6,10 @@ on:
     - cron: '0 8 * * 1'
   workflow_dispatch: {}   # lets you trigger it manually from the Actions tab
 
+concurrency:
+  group: weekly-permit-scraper
+  cancel-in-progress: false   # queue a second trigger rather than run alongside the first
+
 permissions:
   contents: write
 
@@ -41,4 +45,21 @@ jobs:
           [ -f scraper/alert_state.json ] || echo '{}' > scraper/alert_state.json
           git add public/permitwatch_data.json scraper/geocode_cache.json scraper/alert_state.json
           git diff --quiet --cached || git commit -m "Weekly permit data update"
-          git push
+
+          # This job can take 10+ minutes (PDF parsing, one-off geocode
+          # migrations), so main may have moved during the run - e.g. someone
+          # merged a PR while this was still scraping. Rebase onto the latest
+          # main right before pushing, retrying a few times in case another
+          # push lands in that same short window.
+          for attempt in 1 2 3; do
+            if git push; then
+              break
+            fi
+            echo "Push rejected (attempt $attempt), rebasing onto latest main and retrying..."
+            git fetch origin main
+            git rebase origin/main
+            if [ "$attempt" = "3" ]; then
+              echo "::error::Push still failing after $attempt attempts, giving up."
+              exit 1
+            fi
+          done
