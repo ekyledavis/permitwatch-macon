@@ -1,143 +1,699 @@
 {
-  "164 oak haven ave": "Macon",
-  "124 carolina ave": "Macon",
-  "164 franklin st": "Macon",
-  "1144 columbus st": "West Macon",
-  "1408 forsyth st": "Midtown Macon",
-  "136 waterford pl": "Wesleyan Estates",
-  "635 womack st": "Macon",
-  "5826 columbus rd": "North Macon",
-  "3821 fulton mill rd": "East Macon",
-  "1512 bass rd": "North Macon",
-  "5271 arkwright rd": "East Macon",
-  "7209 hawkinsville rd": "South Macon",
-  "861 & 863 willow st; 635, 695, 711, 719, 721, 815, 847 & 851 riverside dr; 0 first st": "Downtown Macon",
-  "2649 antioch rd & 501 charles st": "Macon",
-  "2684, 2676, 2670, 2664, 2658, 2652 antioch rd": "Macon",
-  "495 & 491 pittman st, 2637, 2629, 2615, 2607 peacock st": "Macon",
-  "2641 stanislaus plz": "Macon",
-  "931 walnut st": "Downtown Macon",
-  "497 second st": "Downtown Macon",
-  "598 third st": "Downtown Macon",
-  "1400 bass rd": "Woodcrest",
-  "4031 cavalier dr": "Macon",
-  "2228 anthony rd": "Brookwood",
-  "2255 barnes ferry rd": "O'Reily Estates",
-  "1276 riverside dr": "Riverside",
-  "1014 gray hwy": "East Macon",
-  "3495 riggins mill rd": "Lakeside",
-  "452, 458, 466, 470 holloway st & 2633 cason st": "Macon",
-  "480, 472 holloway st & 2620 peacock st": "Macon",
-  "481, 473, 467, 461, 453 pittman st": "Macon",
-  "212 peninsula ave": "Macon",
-  "139 myrick dr": "Macon",
-  "990 west richmond st": "Bedingfield",
-  "1930 griffin rd": "O'Reily Estates",
-  "1620 bass rd": "North Macon",
-  "248 mercer jct": "Macon",
-  "480, 472, 466 pittman st & 2665 cason st": "Macon",
-  "487, 479, 475, 459, 453 spikes st": "Macon",
-  "2884, 2872, 2862, & 2848 antioch rd": "Macon",
-  "616 poplar st": "Downtown Macon",
-  "2064 vineville ave": "Vineville",
-  "857 third st": "Downtown Macon",
-  "2614 stanislaus cir": "Macon",
-  "1074 inverness ave": "Macon",
-  "1184 holt ave": "Macon",
-  "2884, 2872, 2862, 2848, & 2838 antioch rd": "Macon",
-  "5988 mt pleasant church rd": "Macon",
-  "5171 eisenhower pkwy": "Macon Mall Area",
-  "3401 ocmulgee east blvd": "Lakeside",
-  "3980 elnora dr": "McKibben Lane",
-  "533 grenada terr": "Macon",
-  "2808, 2806, 2782, & 2770 antioch rd": "Macon",
-  "2704, 2734, 2744, & 2752 antioch rd": "Macon",
-  "331 orange st": "Midtown Macon",
-  "1025 bond st": "Bond Street",
-  "895/ 891 elm st": "Macon",
-  "277 pierce ave": "Macon",
-  "324 & 330 buford pl": "Riverside Hills",
-  "335 lincoln ave": "Macon",
-  "3430 napier ave": "Log Cabin Heights",
-  "5986 & 5898 moseley dixon rd": "Macon",
-  "2000 northside crossing": "Macon",
-  "3726 overlook ave": "Brookwood Hills",
-  "3075 & 3091 antioch rd": "Macon",
-  "3125, 3137, 3157, 3161, 3175, & 3185 antioch rd": "Macon",
-  "291 hines ter": "Riverside Hills",
-  "1657 coleman ave": "Macon",
-  "2682 stanislaus cir": "Macon",
-  "350 cherry st aka 360 cherry st": "Downtown Macon",
-  "2611 hillcrest ave": "Macon",
-  "100 waterford pl": "Wesleyan Estates",
-  "3586 riverside dr": "Riverview",
-  "5073 forsyth rd": "Castlegate",
-  "5205 & 5241 columbus rd": "North Macon",
-  "3750 jessie rice st": "Lindsey Park",
-  "2840 hightower rd": "Macon",
-  "291 hines terr": "Riverside Hills",
-  "267 buford pl": "Riverside Hills",
-  "5205 columbus rd": "North Macon",
-  "3450 ocmulgee east blvd & 2708 herbert smart airport rd": "Macon",
-  "4700 sheraton dr": "Macon",
-  "522 rutherford ave": "Macon",
-  "819 edgewood ave": "Macon",
-  "5986 moseley dixon rd": "Macon",
-  "1408 & 1436 forsyth st": "Midtown Macon",
-  "4400 cavalier dr": "Macon",
-  "3651 northside dr": "McKibben Lane",
-  "6375 moseley dixon rd": "Macon",
-  "2340 crissey dr": "Macon",
-  "856, 864 first st": "Downtown Macon",
-  "2619 suwanee ave": "Macon",
-  "185 oak haven ave": "Macon",
-  "2056 vineville ave": "Vineville",
-  "2020 vineville ave": "Vineville",
-  "4632 dykes rd": "Macon",
-  "3955 arkwright rd": "East Macon",
-  "1433 eisenhower pkwy": "Anthony Terrace",
-  "4505 columbus rd": "Green Lawn Acres",
-  "3902 northside dr": "McKibben Lane",
-  "4307 forsyth rd": "Country Club Estates",
-  "150 sessions dr": "Macon",
-  "4706 raley rd": "Macon",
-  "3035 antioch rd, 506, 510 & 514 rutherford ave": "Macon",
-  "5316 valley forge rd": "Macon",
-  "4283 worsham ave": "Macon",
-  "555 fifth st": "Downtown Macon",
-  "2666 hillcrest ave": "Macon",
-  "428 second st (upper floor of social duck)": "Downtown Macon",
-  "6461 forsyth rd": "Macon",
-  "4951 riverside dr": "Riverside",
-  "4580 north mumford rd": "Macon",
-  "2686 montpelier ave": "Macon",
-  "327 third st": "Downtown Macon",
-  "448 second st": "Downtown Macon",
-  "795 maynard st": "Macon",
-  "2770 napier ave": "Log Cabin Heights",
-  "192 stonewall pl": "Macon",
-  "2669 hillcrest ave": "Macon",
-  "468 second st": "Downtown Macon",
-  "536, 544, 552 church st": "Macon",
-  "855 & 875 lamar rd": "Kings Cove",
-  "863 wimbish rd": "Wimbish Hills",
-  "4979 mercer university dr": "West Oak",
-  "2437 vineville ave": "Vineville",
-  "1222 calhoun st": "Macon",
-  "895 elm st": "Macon",
-  "1369 jackson st": "Macon",
-  "5781 zebulon rd": "West Macon",
-  "7746 lwr thomaston rd": "Macon",
-  "5435 & 5465 houston rd": "South Macon",
-  "1136 linden ave": "Macon",
-  "1415 bass rd": "Woodcrest",
-  "510 allied industrial blvd": "Macon",
-  "7410 houston rd": "South Macon",
-  "1605 rembert ave": "Macon",
-  "910 riverside dr": "Riverside",
-  "800 second st": "Downtown Macon",
-  "162 corbin ave": "Riverside Hills",
-  "354 pine st ln & 754 martin luther king jr blvd": "Macon",
+  "164 oak haven ave": {
+    "neighborhood": "Macon",
+    "lat": 32.8451671,
+    "lng": -83.6588451
+  },
+  "124 carolina ave": {
+    "neighborhood": "Macon",
+    "lat": 32.8464998,
+    "lng": -83.6685217
+  },
+  "164 franklin st": {
+    "neighborhood": "Macon",
+    "lat": 32.8431412,
+    "lng": -83.6326675
+  },
+  "1144 columbus st": {
+    "neighborhood": "West Macon",
+    "lat": 32.8366803,
+    "lng": -83.6734629
+  },
+  "1408 forsyth st": {
+    "neighborhood": "Midtown Macon",
+    "lat": 32.8377499,
+    "lng": -83.6438042
+  },
+  "136 waterford pl": {
+    "neighborhood": "Wesleyan Estates",
+    "lat": 32.8894292,
+    "lng": -83.7244082
+  },
+  "635 womack st": {
+    "neighborhood": "Macon",
+    "lat": 32.8493925,
+    "lng": -83.6144073
+  },
+  "5826 columbus rd": {
+    "neighborhood": "North Macon",
+    "lat": 32.8101093,
+    "lng": -83.7487374
+  },
+  "3821 fulton mill rd": {
+    "neighborhood": "East Macon",
+    "lat": 32.7989411,
+    "lng": -83.7532553
+  },
+  "1512 bass rd": {
+    "neighborhood": "North Macon",
+    "lat": 32.925883,
+    "lng": -83.7376461
+  },
+  "5271 arkwright rd": {
+    "neighborhood": "East Macon",
+    "lat": 32.9258014,
+    "lng": -83.7018045
+  },
+  "7209 hawkinsville rd": {
+    "neighborhood": "South Macon",
+    "lat": 32.7161162,
+    "lng": -83.6489676
+  },
+  "861 & 863 willow st; 635, 695, 711, 719, 721, 815, 847 & 851 riverside dr; 0 first st": {
+    "neighborhood": "Downtown Macon",
+    "lat": null,
+    "lng": null
+  },
+  "2649 antioch rd & 501 charles st": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "2684, 2676, 2670, 2664, 2658, 2652 antioch rd": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "495 & 491 pittman st, 2637, 2629, 2615, 2607 peacock st": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "2641 stanislaus plz": {
+    "neighborhood": "Macon",
+    "lat": 32.8453807,
+    "lng": -83.6632842
+  },
+  "931 walnut st": {
+    "neighborhood": "Downtown Macon",
+    "lat": 32.8424667,
+    "lng": -83.6319807
+  },
+  "497 second st": {
+    "neighborhood": "Downtown Macon",
+    "lat": null,
+    "lng": null
+  },
+  "598 third st": {
+    "neighborhood": "Downtown Macon",
+    "lat": null,
+    "lng": null
+  },
+  "1400 bass rd": {
+    "neighborhood": "Woodcrest",
+    "lat": 32.9223697,
+    "lng": -83.7408039
+  },
+  "4031 cavalier dr": {
+    "neighborhood": "Macon",
+    "lat": 32.8328434,
+    "lng": -83.7375235
+  },
+  "2228 anthony rd": {
+    "neighborhood": "Brookwood",
+    "lat": 32.8219269,
+    "lng": -83.6787813
+  },
+  "2255 barnes ferry rd": {
+    "neighborhood": "O'Reily Estates",
+    "lat": 32.7320884,
+    "lng": -83.653767
+  },
+  "1276 riverside dr": {
+    "neighborhood": "Riverside",
+    "lat": 32.8470216,
+    "lng": -83.6371633
+  },
+  "1014 gray hwy": {
+    "neighborhood": "East Macon",
+    "lat": 32.8540833,
+    "lng": -83.6183871
+  },
+  "3495 riggins mill rd": {
+    "neighborhood": "Lakeside",
+    "lat": 32.8353153,
+    "lng": -83.5672909
+  },
+  "452, 458, 466, 470 holloway st & 2633 cason st": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "480, 472 holloway st & 2620 peacock st": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "481, 473, 467, 461, 453 pittman st": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "212 peninsula ave": {
+    "neighborhood": "Macon",
+    "lat": 32.8554222,
+    "lng": -83.8240018
+  },
+  "139 myrick dr": {
+    "neighborhood": "Macon",
+    "lat": 32.8294587,
+    "lng": -83.8206445
+  },
+  "990 west richmond st": {
+    "neighborhood": "Bedingfield",
+    "lat": 32.7943502,
+    "lng": -83.6559668
+  },
+  "1930 griffin rd": {
+    "neighborhood": "O'Reily Estates",
+    "lat": 32.7163403,
+    "lng": -83.6434628
+  },
+  "1620 bass rd": {
+    "neighborhood": "North Macon",
+    "lat": 32.930127,
+    "lng": -83.7306738
+  },
+  "248 mercer jct": {
+    "neighborhood": "Macon",
+    "lat": 32.8349506,
+    "lng": -83.7322549
+  },
+  "480, 472, 466 pittman st & 2665 cason st": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "487, 479, 475, 459, 453 spikes st": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "2884, 2872, 2862, & 2848 antioch rd": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "616 poplar st": {
+    "neighborhood": "Downtown Macon",
+    "lat": 32.8352091,
+    "lng": -83.6304938
+  },
+  "2064 vineville ave": {
+    "neighborhood": "Vineville",
+    "lat": 32.843484,
+    "lng": -83.6524705
+  },
+  "857 third st": {
+    "neighborhood": "Downtown Macon",
+    "lat": null,
+    "lng": null
+  },
+  "2614 stanislaus cir": {
+    "neighborhood": "Macon",
+    "lat": 32.8427009,
+    "lng": -83.6630241
+  },
+  "1074 inverness ave": {
+    "neighborhood": "Macon",
+    "lat": 32.837162,
+    "lng": -83.668788
+  },
+  "1184 holt ave": {
+    "neighborhood": "Macon",
+    "lat": 32.8349989,
+    "lng": -83.6550251
+  },
+  "2884, 2872, 2862, 2848, & 2838 antioch rd": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "5988 mt pleasant church rd": {
+    "neighborhood": "Macon",
+    "lat": 32.757861,
+    "lng": -83.7610415
+  },
+  "5171 eisenhower pkwy": {
+    "neighborhood": "Macon Mall Area",
+    "lat": 32.8033088,
+    "lng": -83.732625
+  },
+  "3401 ocmulgee east blvd": {
+    "neighborhood": "Lakeside",
+    "lat": 32.8299921,
+    "lng": -83.5737667
+  },
+  "3980 elnora dr": {
+    "neighborhood": "McKibben Lane",
+    "lat": 32.9024704,
+    "lng": -83.6935648
+  },
+  "533 grenada terr": {
+    "neighborhood": "Macon",
+    "lat": 32.8003168,
+    "lng": -83.6447172
+  },
+  "2808, 2806, 2782, & 2770 antioch rd": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "2704, 2734, 2744, & 2752 antioch rd": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "331 orange st": {
+    "neighborhood": "Midtown Macon",
+    "lat": 32.8421609,
+    "lng": -83.6364316
+  },
+  "1025 bond st": {
+    "neighborhood": "Bond Street",
+    "lat": 32.8428488,
+    "lng": -83.6344975
+  },
+  "895/ 891 elm st": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "277 pierce ave": {
+    "neighborhood": "Macon",
+    "lat": 32.8505142,
+    "lng": -83.6623431
+  },
+  "324 & 330 buford pl": {
+    "neighborhood": "Riverside Hills",
+    "lat": 32.8500268,
+    "lng": -83.6598149
+  },
+  "335 lincoln ave": {
+    "neighborhood": "Macon",
+    "lat": 32.8491853,
+    "lng": -83.6475269
+  },
+  "3430 napier ave": {
+    "neighborhood": "Log Cabin Heights",
+    "lat": 32.841569,
+    "lng": -83.687073
+  },
+  "5986 & 5898 moseley dixon rd": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "2000 northside crossing": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "3726 overlook ave": {
+    "neighborhood": "Brookwood Hills",
+    "lat": 32.8629442,
+    "lng": -83.6829875
+  },
+  "3075 & 3091 antioch rd": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "3125, 3137, 3157, 3161, 3175, & 3185 antioch rd": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "291 hines ter": {
+    "neighborhood": "Riverside Hills",
+    "lat": 32.8506215,
+    "lng": -83.6611146
+  },
+  "1657 coleman ave": {
+    "neighborhood": "Macon",
+    "lat": 32.8337346,
+    "lng": -83.6504595
+  },
+  "2682 stanislaus cir": {
+    "neighborhood": "Macon",
+    "lat": 32.8439835,
+    "lng": -83.6658187
+  },
+  "350 cherry st aka 360 cherry st": {
+    "neighborhood": "Downtown Macon",
+    "lat": null,
+    "lng": null
+  },
+  "2611 hillcrest ave": {
+    "neighborhood": "Macon",
+    "lat": 32.8389915,
+    "lng": -83.6628334
+  },
+  "100 waterford pl": {
+    "neighborhood": "Wesleyan Estates",
+    "lat": 32.88874,
+    "lng": -83.717545
+  },
+  "3586 riverside dr": {
+    "neighborhood": "Riverview",
+    "lat": 32.8652042,
+    "lng": -83.6539695
+  },
+  "5073 forsyth rd": {
+    "neighborhood": "Castlegate",
+    "lat": 32.8857784,
+    "lng": -83.7355701
+  },
+  "5205 & 5241 columbus rd": {
+    "neighborhood": "North Macon",
+    "lat": null,
+    "lng": null
+  },
+  "3750 jessie rice st": {
+    "neighborhood": "Lindsey Park",
+    "lat": 32.794913,
+    "lng": -83.6928683
+  },
+  "2840 hightower rd": {
+    "neighborhood": "Macon",
+    "lat": 32.8108723,
+    "lng": -83.6499326
+  },
+  "291 hines terr": {
+    "neighborhood": "Riverside Hills",
+    "lat": 32.8506215,
+    "lng": -83.6611146
+  },
+  "267 buford pl": {
+    "neighborhood": "Riverside Hills",
+    "lat": 32.850262,
+    "lng": -83.6597542
+  },
+  "5205 columbus rd": {
+    "neighborhood": "North Macon",
+    "lat": 32.8159118,
+    "lng": -83.7325564
+  },
+  "3450 ocmulgee east blvd & 2708 herbert smart airport rd": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "4700 sheraton dr": {
+    "neighborhood": "Macon",
+    "lat": 32.920819,
+    "lng": -83.707351
+  },
+  "522 rutherford ave": {
+    "neighborhood": "Macon",
+    "lat": 32.8074409,
+    "lng": -83.6439104
+  },
+  "819 edgewood ave": {
+    "neighborhood": "Macon",
+    "lat": 32.8259353,
+    "lng": -83.6424957
+  },
+  "5986 moseley dixon rd": {
+    "neighborhood": "Macon",
+    "lat": 32.8315918,
+    "lng": -83.7542973
+  },
+  "1408 & 1436 forsyth st": {
+    "neighborhood": "Midtown Macon",
+    "lat": null,
+    "lng": null
+  },
+  "4400 cavalier dr": {
+    "neighborhood": "Macon",
+    "lat": 32.8213194,
+    "lng": -83.7358698
+  },
+  "3651 northside dr": {
+    "neighborhood": "McKibben Lane",
+    "lat": 32.8963744,
+    "lng": -83.6897879
+  },
+  "6375 moseley dixon rd": {
+    "neighborhood": "Macon",
+    "lat": 32.8313901,
+    "lng": -83.7688317
+  },
+  "2340 crissey dr": {
+    "neighborhood": "Macon",
+    "lat": 32.8858799,
+    "lng": -83.6024709
+  },
+  "856, 864 first st": {
+    "neighborhood": "Downtown Macon",
+    "lat": null,
+    "lng": null
+  },
+  "2619 suwanee ave": {
+    "neighborhood": "Macon",
+    "lat": 32.8399303,
+    "lng": -83.6629603
+  },
+  "185 oak haven ave": {
+    "neighborhood": "Macon",
+    "lat": 32.844857,
+    "lng": -83.659033
+  },
+  "2056 vineville ave": {
+    "neighborhood": "Vineville",
+    "lat": 32.8433927,
+    "lng": -83.6523262
+  },
+  "2020 vineville ave": {
+    "neighborhood": "Vineville",
+    "lat": 32.8422132,
+    "lng": -83.6504567
+  },
+  "4632 dykes rd": {
+    "neighborhood": "Macon",
+    "lat": 32.7984058,
+    "lng": -83.7283163
+  },
+  "3955 arkwright rd": {
+    "neighborhood": "East Macon",
+    "lat": 32.9110157,
+    "lng": -83.6902037
+  },
+  "1433 eisenhower pkwy": {
+    "neighborhood": "Anthony Terrace",
+    "lat": 32.8146455,
+    "lng": -83.6662515
+  },
+  "4505 columbus rd": {
+    "neighborhood": "Green Lawn Acres",
+    "lat": 32.8244039,
+    "lng": -83.7165123
+  },
+  "3902 northside dr": {
+    "neighborhood": "McKibben Lane",
+    "lat": 32.8982902,
+    "lng": -83.6960998
+  },
+  "4307 forsyth rd": {
+    "neighborhood": "Country Club Estates",
+    "lat": 32.8664096,
+    "lng": -83.6944251
+  },
+  "150 sessions dr": {
+    "neighborhood": "Macon",
+    "lat": 32.8208188,
+    "lng": -83.6504212
+  },
+  "4706 raley rd": {
+    "neighborhood": "Macon",
+    "lat": 32.8006255,
+    "lng": -83.7313251
+  },
+  "3035 antioch rd, 506, 510 & 514 rutherford ave": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "5316 valley forge rd": {
+    "neighborhood": "Macon",
+    "lat": 32.868817,
+    "lng": -83.7260295
+  },
+  "4283 worsham ave": {
+    "neighborhood": "Macon",
+    "lat": 32.7881036,
+    "lng": -83.6502555
+  },
+  "555 fifth st": {
+    "neighborhood": "Downtown Macon",
+    "lat": null,
+    "lng": null
+  },
+  "2666 hillcrest ave": {
+    "neighborhood": "Macon",
+    "lat": 32.8388676,
+    "lng": -83.6644487
+  },
+  "428 second st (upper floor of social duck)": {
+    "neighborhood": "Downtown Macon",
+    "lat": null,
+    "lng": null
+  },
+  "6461 forsyth rd": {
+    "neighborhood": "Macon",
+    "lat": 32.9023571,
+    "lng": -83.7686558
+  },
+  "4951 riverside dr": {
+    "neighborhood": "Riverside",
+    "lat": 32.9266678,
+    "lng": -83.7122649
+  },
+  "4580 north mumford rd": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "2686 montpelier ave": {
+    "neighborhood": "Macon",
+    "lat": 32.831468,
+    "lng": -83.664714
+  },
+  "327 third st": {
+    "neighborhood": "Downtown Macon",
+    "lat": null,
+    "lng": null
+  },
+  "448 second st": {
+    "neighborhood": "Downtown Macon",
+    "lat": null,
+    "lng": null
+  },
+  "795 maynard st": {
+    "neighborhood": "Macon",
+    "lat": 32.850905,
+    "lng": -83.6108096
+  },
+  "2770 napier ave": {
+    "neighborhood": "Log Cabin Heights",
+    "lat": 32.836098,
+    "lng": -83.667614
+  },
+  "192 stonewall pl": {
+    "neighborhood": "Macon",
+    "lat": 32.8485895,
+    "lng": -83.6640753
+  },
+  "2669 hillcrest ave": {
+    "neighborhood": "Macon",
+    "lat": 32.8390342,
+    "lng": -83.6645233
+  },
+  "468 second st": {
+    "neighborhood": "Downtown Macon",
+    "lat": null,
+    "lng": null
+  },
+  "536, 544, 552 church st": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "855 & 875 lamar rd": {
+    "neighborhood": "Kings Cove",
+    "lat": 32.8924267,
+    "lng": -83.7746311
+  },
+  "863 wimbish rd": {
+    "neighborhood": "Wimbish Hills",
+    "lat": 32.8854743,
+    "lng": -83.674999
+  },
+  "4979 mercer university dr": {
+    "neighborhood": "West Oak",
+    "lat": 32.8307529,
+    "lng": -83.724985
+  },
+  "2437 vineville ave": {
+    "neighborhood": "Vineville",
+    "lat": 32.8463399,
+    "lng": -83.6577267
+  },
+  "1222 calhoun st": {
+    "neighborhood": "Macon",
+    "lat": 32.8301933,
+    "lng": -83.6425051
+  },
+  "895 elm st": {
+    "neighborhood": "Macon",
+    "lat": 32.8273346,
+    "lng": -83.6426197
+  },
+  "1369 jackson st": {
+    "neighborhood": "Macon",
+    "lat": 32.8278204,
+    "lng": -83.6425843
+  },
+  "5781 zebulon rd": {
+    "neighborhood": "West Macon",
+    "lat": 32.8796593,
+    "lng": -83.7509809
+  },
+  "7746 lwr thomaston rd": {
+    "neighborhood": "Macon",
+    "lat": 32.8430814,
+    "lng": -83.8500504
+  },
+  "5435 & 5465 houston rd": {
+    "neighborhood": "South Macon",
+    "lat": null,
+    "lng": null
+  },
+  "1136 linden ave": {
+    "neighborhood": "Macon",
+    "lat": 32.8350087,
+    "lng": -83.6483996
+  },
+  "1415 bass rd": {
+    "neighborhood": "Woodcrest",
+    "lat": 32.9224928,
+    "lng": -83.7404468
+  },
+  "510 allied industrial blvd": {
+    "neighborhood": "Macon",
+    "lat": 32.776015,
+    "lng": -83.6458285
+  },
+  "7410 houston rd": {
+    "neighborhood": "South Macon",
+    "lat": 32.6952092,
+    "lng": -83.7013185
+  },
+  "1605 rembert ave": {
+    "neighborhood": "Macon",
+    "lat": 32.8353505,
+    "lng": -83.6484424
+  },
+  "910 riverside dr": {
+    "neighborhood": "Riverside",
+    "lat": 32.8433876,
+    "lng": -83.6306191
+  },
+  "800 second st": {
+    "neighborhood": "Downtown Macon",
+    "lat": null,
+    "lng": null
+  },
+  "162 corbin ave": {
+    "neighborhood": "Riverside Hills",
+    "lat": 32.8479341,
+    "lng": -83.657387
+  },
+  "354 pine st ln & 754 martin luther king jr blvd": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
   "1163 adams st": "Macon",
   "1069 elm st": "Macon",
   "676 college st": "College Hill",
@@ -202,114 +758,550 @@
   "120 emory greene dr": "West Oak",
   "5665 new forsyth rd & 113 preston ct": "Macon",
   "4450 cavalier dr": "Macon",
-  "5250 sardis church rd": "Macon",
+  "5250 sardis church rd": {
+    "neighborhood": "Macon",
+    "lat": 32.7165042,
+    "lng": -83.7342451
+  },
   "6112 houston rd": "Bevinwood",
-  "442 second st": "Downtown Macon",
-  "337 seventh st": "Macon",
-  "885 college st": "College Hill",
-  "2656 stanislaus cir": "Macon",
-  "2713 vineville ave": "Payne",
-  "144 pierce ave": "Macon",
-  "2626 elizabeth pl": "Macon",
-  "217 hines terr": "Macon",
-  "682 mulberry st": "Downtown Macon",
-  "360 first st": "Downtown Macon",
-  "634 first st": "Downtown Macon",
-  "618 & 626 arlington pl": "Macon",
-  "1134 columbus st": "West Macon",
-  "518 cherry st, ste 101": "Downtown Macon",
-  "2840 riverside dr": "Thornwood",
-  "2471 houston ave (aka 2475 houston ave)": "South Macon",
-  "245, 239, 235, & 227 pittman st and 2643, 2637, & 2631 waterville rd": "Macon",
-  "2622 texas st": "Macon",
-  "2575 waterville rd": "Macon",
-  "317 buford pl": "Macon",
-  "2628 stanislaus cir": "Macon",
-  "1231 jefferson terr": "Macon",
-  "900 first st": "Downtown Macon",
-  "440 martin luther king jr blvd": "Macon",
-  "3996 elnora dr & 2000 sue dr": "Macon",
-  "256, 262, 272, 284, 296 pittman st": "Macon",
-  "253, 259, 275, 281, 291 pittman st": "Macon",
-  "252, 264, 272, 286 holloway st": "Macon",
-  "6601 zebulon rd": "West Macon",
-  "4930 bloomfield rd": "Vinson Village",
-  "1465 burton ave": "Brookwood",
-  "490 hall st": "Macon",
-  "345 balkcom ave": "Macon",
-  "3355 finneydale ct s": "Crystal Springs",
-  "382 cherry st": "Downtown Macon",
-  "5890 zebulon rd": "West Macon",
-  "3985 northside dr & 1645 forest hill rd": "Macon",
-  "3075 antioch rd": "Macon",
-  "289, 277, 255 holloway st": "Macon",
-  "309 & 325 holloway st": "Macon",
-  "2623, 2629, 2637 toombs st": "Macon",
-  "2610, 2620 and 2634 toombs st": "Macon",
-  "4000 hillene dr": "Macon",
-  "353 buford pl": "Macon",
-  "2735 suwanee ave": "Macon",
-  "473 second st": "Downtown Macon",
-  "7451 w mccall rd": "Macon",
-  "4111 northside dr": "McKibben Lane",
-  "4897 sardis church rd": "Sardis Estates",
-  "690 holt ave": "Macon",
-  "1495 rocky creek rd & 4099 st charles pl": "Macon",
-  "305, 311 & 319 pittman st": "Macon",
-  "306, 322, 334, & 346 pittman st": "Macon",
-  "328, 334, 340, 348 holloway st & 0 stevens st": "Macon",
-  "2324 english ave": "Macon",
-  "2336 english ave": "Macon",
-  "2350 english ave": "Macon",
-  "1070 elm st": "Macon",
-  "1016 ash st": "Macon",
-  "167 apple valley rd": "Macon",
-  "534 cherry st ln": "Downtown Macon",
-  "213 & 217 richard ivey pkwy": "Macon",
-  "3333 northside dr, ste g": "Macon",
-  "1501 mercer university dr": "North Macon",
-  "1771 bass rd, 0 wesleyan, 5250 riverside dr, 5463, 5469, 5471 new forsyth rd": "Riverside",
-  "343 pittman st": "Macon",
-  "382, 374, 366, 358 pittman st and 2674 broadway": "South Macon",
-  "389, 385, 369, 361, and 349 pittman st": "Macon",
-  "828 riverside dr": "Riverside",
-  "3837 houston ave": "Bedingfield",
-  "5189 sardis church rd aka 1190 frank amerson pkwy": "Macon",
-  "3955 arkwright rd ste e": "East Macon",
-  "3527 brookdale ave": "Payne",
-  "327 pittman st": "Macon",
-  "100, 104, & 110 cattlemens dr": "Macon",
-  "2556 & 2576 broadway, 0 holloway st, 2575 & 2587 stevens st": "South Macon",
-  "2614 & 2628 broadway, 358 holloway st, 2621 stevens st": "South Macon",
-  "3494 ada st": "Macon",
-  "5955 zebulon rd": "West Macon",
-  "5230 sardis church rd": "Macon",
-  "1335 jackson st": "Macon",
-  "455 third st": "Downtown Macon",
-  "3165 hartley bridge rd": "South Macon",
-  "2255 gray hwy": "East Macon",
-  "1501 bass rd": "North Macon",
-  "4380 mercer university dr": "Briarwood Hill",
-  "6790 houston rd": "Bevinwood",
-  "8820 industrial hwy": "Macon",
-  "576 will scarlet way": "Sherwood Forest",
-  "0 davis rd": "Macon",
-  "441, 433, 425, 417, & 409 pittman st": "Macon",
-  "2634 cason st, 434 & 426 holloway st, 2619 & 2625 broadway": "South Macon",
-  "447, 439, 431, 423, 415 & 407 holloway st": "Macon",
-  "3490 tidwell rd": "Macon",
-  "1990 bass rd & 5384 new forsyth rd": "North Macon",
-  "1100 & 1120 bass rd": "North Macon",
-  "4300 mead rd": "Macon",
-  "1955 dove st": "Macon",
-  "122 florida ave": "Macon",
-  "804 cherry st": "Downtown Macon",
-  "3960 heathers glenn dr": "Macon",
-  "2544 peacock st": "Macon",
-  "2590, 2578 peacock st, 469 holloway st, 2621 cason st": "Macon",
-  "485 holloway st, 2573, 2547, 2533 peacock st": "Macon",
-  "4091 san juan ave": "Macon",
-  "4083 san juan ave": "Macon",
-  "447,439, 431, 423, 415 & 407 holloway st": "Macon",
-  "3720 & 3710 pio nono ave": "South Macon"
+  "442 second st": {
+    "neighborhood": "Downtown Macon",
+    "lat": null,
+    "lng": null
+  },
+  "337 seventh st": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "885 college st": {
+    "neighborhood": "College Hill",
+    "lat": 32.8349677,
+    "lng": -83.6430753
+  },
+  "2656 stanislaus cir": {
+    "neighborhood": "Macon",
+    "lat": 32.8436817,
+    "lng": -83.6657904
+  },
+  "2713 vineville ave": {
+    "neighborhood": "Payne",
+    "lat": 32.8462835,
+    "lng": -83.6663314
+  },
+  "144 pierce ave": {
+    "neighborhood": "Macon",
+    "lat": 32.8477716,
+    "lng": -83.6625491
+  },
+  "2626 elizabeth pl": {
+    "neighborhood": "Macon",
+    "lat": 32.848819,
+    "lng": -83.662592
+  },
+  "217 hines terr": {
+    "neighborhood": "Macon",
+    "lat": 32.8494881,
+    "lng": -83.6609538
+  },
+  "682 mulberry st": {
+    "neighborhood": "Downtown Macon",
+    "lat": 32.838387,
+    "lng": -83.6291194
+  },
+  "360 first st": {
+    "neighborhood": "Downtown Macon",
+    "lat": null,
+    "lng": null
+  },
+  "634 first st": {
+    "neighborhood": "Downtown Macon",
+    "lat": null,
+    "lng": null
+  },
+  "618 & 626 arlington pl": {
+    "neighborhood": "Macon",
+    "lat": 32.8382603,
+    "lng": -83.6413782
+  },
+  "1134 columbus st": {
+    "neighborhood": "West Macon",
+    "lat": 32.8367059,
+    "lng": -83.6734627
+  },
+  "518 cherry st, ste 101": {
+    "neighborhood": "Downtown Macon",
+    "lat": null,
+    "lng": null
+  },
+  "2840 riverside dr": {
+    "neighborhood": "Thornwood",
+    "lat": 32.8796924,
+    "lng": -83.6680245
+  },
+  "2471 houston ave (aka 2475 houston ave)": {
+    "neighborhood": "South Macon",
+    "lat": null,
+    "lng": null
+  },
+  "245, 239, 235, & 227 pittman st and 2643, 2637, & 2631 waterville rd": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "2622 texas st": {
+    "neighborhood": "Macon",
+    "lat": 32.8118033,
+    "lng": -83.6372554
+  },
+  "2575 waterville rd": {
+    "neighborhood": "Macon",
+    "lat": 32.813104,
+    "lng": -83.636396
+  },
+  "317 buford pl": {
+    "neighborhood": "Macon",
+    "lat": 32.8514685,
+    "lng": -83.6599466
+  },
+  "2628 stanislaus cir": {
+    "neighborhood": "Macon",
+    "lat": 32.8439895,
+    "lng": -83.6648019
+  },
+  "1231 jefferson terr": {
+    "neighborhood": "Macon",
+    "lat": 32.8410719,
+    "lng": -83.6391338
+  },
+  "900 first st": {
+    "neighborhood": "Downtown Macon",
+    "lat": null,
+    "lng": null
+  },
+  "440 martin luther king jr blvd": {
+    "neighborhood": "Macon",
+    "lat": 32.8226926,
+    "lng": -83.6360779
+  },
+  "3996 elnora dr & 2000 sue dr": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "256, 262, 272, 284, 296 pittman st": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "253, 259, 275, 281, 291 pittman st": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "252, 264, 272, 286 holloway st": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "6601 zebulon rd": {
+    "neighborhood": "West Macon",
+    "lat": 32.8816798,
+    "lng": -83.7796935
+  },
+  "4930 bloomfield rd": {
+    "neighborhood": "Vinson Village",
+    "lat": 32.783787,
+    "lng": -83.7078338
+  },
+  "1465 burton ave": {
+    "neighborhood": "Brookwood",
+    "lat": 32.8289288,
+    "lng": -83.6821278
+  },
+  "490 hall st": {
+    "neighborhood": "Macon",
+    "lat": 32.8526366,
+    "lng": -83.6162188
+  },
+  "345 balkcom ave": {
+    "neighborhood": "Macon",
+    "lat": 32.844351,
+    "lng": -83.611985
+  },
+  "3355 finneydale ct s": {
+    "neighborhood": "Crystal Springs",
+    "lat": 32.8428254,
+    "lng": -83.5632369
+  },
+  "382 cherry st": {
+    "neighborhood": "Downtown Macon",
+    "lat": 32.8345506,
+    "lng": -83.6258186
+  },
+  "5890 zebulon rd": {
+    "neighborhood": "West Macon",
+    "lat": 32.879713,
+    "lng": -83.754981
+  },
+  "3985 northside dr & 1645 forest hill rd": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "3075 antioch rd": {
+    "neighborhood": "Macon",
+    "lat": 32.8065976,
+    "lng": -83.6427456
+  },
+  "289, 277, 255 holloway st": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "309 & 325 holloway st": {
+    "neighborhood": "Macon",
+    "lat": 32.8130389,
+    "lng": -83.6413565
+  },
+  "2623, 2629, 2637 toombs st": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "2610, 2620 and 2634 toombs st": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "4000 hillene dr": {
+    "neighborhood": "Macon",
+    "lat": 32.8366852,
+    "lng": -83.5335822
+  },
+  "353 buford pl": {
+    "neighborhood": "Macon",
+    "lat": 32.85241,
+    "lng": -83.660092
+  },
+  "2735 suwanee ave": {
+    "neighborhood": "Macon",
+    "lat": 32.8400057,
+    "lng": -83.6665018
+  },
+  "473 second st": {
+    "neighborhood": "Downtown Macon",
+    "lat": null,
+    "lng": null
+  },
+  "7451 w mccall rd": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "4111 northside dr": {
+    "neighborhood": "McKibben Lane",
+    "lat": 32.8985286,
+    "lng": -83.7000539
+  },
+  "4897 sardis church rd": {
+    "neighborhood": "Sardis Estates",
+    "lat": 32.7169155,
+    "lng": -83.7225757
+  },
+  "690 holt ave": {
+    "neighborhood": "Macon",
+    "lat": 32.8386323,
+    "lng": -83.6527784
+  },
+  "1495 rocky creek rd & 4099 st charles pl": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "305, 311 & 319 pittman st": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "306, 322, 334, & 346 pittman st": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "328, 334, 340, 348 holloway st & 0 stevens st": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "2324 english ave": {
+    "neighborhood": "Macon",
+    "lat": 32.8435058,
+    "lng": -83.6565641
+  },
+  "2336 english ave": {
+    "neighborhood": "Macon",
+    "lat": 32.8435042,
+    "lng": -83.6567034
+  },
+  "2350 english ave": {
+    "neighborhood": "Macon",
+    "lat": 32.8435023,
+    "lng": -83.6568659
+  },
+  "1070 elm st": {
+    "neighborhood": "Macon",
+    "lat": 32.8288285,
+    "lng": -83.645402
+  },
+  "1016 ash st": {
+    "neighborhood": "Macon",
+    "lat": 32.8295069,
+    "lng": -83.6436108
+  },
+  "167 apple valley rd": {
+    "neighborhood": "Macon",
+    "lat": 32.8130777,
+    "lng": -83.536571
+  },
+  "534 cherry st ln": {
+    "neighborhood": "Downtown Macon",
+    "lat": 32.8352489,
+    "lng": -83.6285435
+  },
+  "213 & 217 richard ivey pkwy": {
+    "neighborhood": "Macon",
+    "lat": 32.8007011,
+    "lng": -83.7374284
+  },
+  "3333 northside dr, ste g": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "1501 mercer university dr": {
+    "neighborhood": "North Macon",
+    "lat": 32.8259633,
+    "lng": -83.6546847
+  },
+  "1771 bass rd, 0 wesleyan, 5250 riverside dr, 5463, 5469, 5471 new forsyth rd": {
+    "neighborhood": "Riverside",
+    "lat": null,
+    "lng": null
+  },
+  "343 pittman st": {
+    "neighborhood": "Macon",
+    "lat": 32.8121841,
+    "lng": -83.6387231
+  },
+  "382, 374, 366, 358 pittman st and 2674 broadway": {
+    "neighborhood": "South Macon",
+    "lat": null,
+    "lng": null
+  },
+  "389, 385, 369, 361, and 349 pittman st": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "828 riverside dr": {
+    "neighborhood": "Riverside",
+    "lat": 32.84256,
+    "lng": -83.6292247
+  },
+  "3837 houston ave": {
+    "neighborhood": "Bedingfield",
+    "lat": 32.7963349,
+    "lng": -83.6536228
+  },
+  "5189 sardis church rd aka 1190 frank amerson pkwy": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "3955 arkwright rd ste e": {
+    "neighborhood": "East Macon",
+    "lat": null,
+    "lng": null
+  },
+  "3527 brookdale ave": {
+    "neighborhood": "Payne",
+    "lat": 32.8528614,
+    "lng": -83.6823268
+  },
+  "327 pittman st": {
+    "neighborhood": "Macon",
+    "lat": 32.8121867,
+    "lng": -83.6388109
+  },
+  "100, 104, & 110 cattlemens dr": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "2556 & 2576 broadway, 0 holloway st, 2575 & 2587 stevens st": {
+    "neighborhood": "South Macon",
+    "lat": null,
+    "lng": null
+  },
+  "2614 & 2628 broadway, 358 holloway st, 2621 stevens st": {
+    "neighborhood": "South Macon",
+    "lat": null,
+    "lng": null
+  },
+  "3494 ada st": {
+    "neighborhood": "Macon",
+    "lat": 32.8005058,
+    "lng": -83.6419915
+  },
+  "5955 zebulon rd": {
+    "neighborhood": "West Macon",
+    "lat": 32.8828956,
+    "lng": -83.7599839
+  },
+  "5230 sardis church rd": {
+    "neighborhood": "Macon",
+    "lat": 32.7164881,
+    "lng": -83.7340209
+  },
+  "1335 jackson st": {
+    "neighborhood": "Macon",
+    "lat": 32.8281632,
+    "lng": -83.6422957
+  },
+  "455 third st": {
+    "neighborhood": "Downtown Macon",
+    "lat": null,
+    "lng": null
+  },
+  "3165 hartley bridge rd": {
+    "neighborhood": "South Macon",
+    "lat": 32.7465926,
+    "lng": -83.676452
+  },
+  "2255 gray hwy": {
+    "neighborhood": "East Macon",
+    "lat": 32.881563,
+    "lng": -83.605578
+  },
+  "1501 bass rd": {
+    "neighborhood": "North Macon",
+    "lat": 32.924976,
+    "lng": -83.738256
+  },
+  "4380 mercer university dr": {
+    "neighborhood": "Briarwood Hill",
+    "lat": 32.8257968,
+    "lng": -83.7128135
+  },
+  "6790 houston rd": {
+    "neighborhood": "Bevinwood",
+    "lat": 32.7170123,
+    "lng": -83.6891372
+  },
+  "8820 industrial hwy": {
+    "neighborhood": "Macon",
+    "lat": 32.6908408,
+    "lng": -83.6809351
+  },
+  "576 will scarlet way": {
+    "neighborhood": "Sherwood Forest",
+    "lat": 32.8677704,
+    "lng": -83.7797947
+  },
+  "0 davis rd": {
+    "neighborhood": "Macon",
+    "lat": 32.8215835,
+    "lng": -83.5107441
+  },
+  "441, 433, 425, 417, & 409 pittman st": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "2634 cason st, 434 & 426 holloway st, 2619 & 2625 broadway": {
+    "neighborhood": "South Macon",
+    "lat": null,
+    "lng": null
+  },
+  "447, 439, 431, 423, 415 & 407 holloway st": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "3490 tidwell rd": {
+    "neighborhood": "Macon",
+    "lat": 32.8000228,
+    "lng": -83.7944976
+  },
+  "1990 bass rd & 5384 new forsyth rd": {
+    "neighborhood": "North Macon",
+    "lat": null,
+    "lng": null
+  },
+  "1100 & 1120 bass rd": {
+    "neighborhood": "North Macon",
+    "lat": 32.9037134,
+    "lng": -83.7457784
+  },
+  "4300 mead rd": {
+    "neighborhood": "Macon",
+    "lat": 32.7867708,
+    "lng": -83.6395904
+  },
+  "1955 dove st": {
+    "neighborhood": "Macon",
+    "lat": 32.823532,
+    "lng": -83.6548941
+  },
+  "122 florida ave": {
+    "neighborhood": "Macon",
+    "lat": 32.8456869,
+    "lng": -83.666348
+  },
+  "804 cherry st": {
+    "neighborhood": "Downtown Macon",
+    "lat": 32.8384696,
+    "lng": -83.6323047
+  },
+  "3960 heathers glenn dr": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "2544 peacock st": {
+    "neighborhood": "Macon",
+    "lat": 32.8133847,
+    "lng": -83.6419755
+  },
+  "2590, 2578 peacock st, 469 holloway st, 2621 cason st": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "485 holloway st, 2573, 2547, 2533 peacock st": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "4091 san juan ave": {
+    "neighborhood": "Macon",
+    "lat": 32.7918701,
+    "lng": -83.6497043
+  },
+  "4083 san juan ave": {
+    "neighborhood": "Macon",
+    "lat": 32.7920752,
+    "lng": -83.6496976
+  },
+  "447,439, 431, 423, 415 & 407 holloway st": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "3720 & 3710 pio nono ave": {
+    "neighborhood": "South Macon",
+    "lat": null,
+    "lng": null
+  }
 }
