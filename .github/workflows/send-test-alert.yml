@@ -1,0 +1,25 @@
+name: Send Test Alert
+
+on:
+  workflow_dispatch: {}   # manual only - never runs on a schedule
+
+jobs:
+  test-alert:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install psycopg2-binary requests
+
+      - name: Send test alert to all subscribers
+        env:
+          POSTGRES_URL: ${{ secrets.POSTGRES_URL }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+        run: python scraper/send_test_alert.py
