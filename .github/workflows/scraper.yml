@@ -22,15 +22,23 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install requests beautifulsoup4 pdfplumber
+        run: pip install requests beautifulsoup4 pdfplumber psycopg2-binary
 
       - name: Run scraper
         run: python scraper/mbpz_scraper.py --months 12 --out public/permitwatch_data.json
+
+      - name: Send alert emails to subscribers
+        continue-on-error: true  # never let an alerting bug block the data commit below
+        env:
+          POSTGRES_URL: ${{ secrets.POSTGRES_URL }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+        run: python scraper/send_alerts.py
 
       - name: Commit updated data
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add public/permitwatch_data.json scraper/geocode_cache.json
+          [ -f scraper/alert_state.json ] || echo '{}' > scraper/alert_state.json
+          git add public/permitwatch_data.json scraper/geocode_cache.json scraper/alert_state.json
           git diff --quiet --cached || git commit -m "Weekly permit data update"
           git push

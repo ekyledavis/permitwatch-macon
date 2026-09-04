@@ -336,12 +336,25 @@ def street_neighborhood(address):
 
 def geocode_neighborhood(address, cache):
     """
-    Look up neighborhood for a Macon address using Nominatim.
-    Returns neighborhood name string.
+    Look up neighborhood + coordinates for a Macon address using Nominatim.
+    Returns (neighborhood, lat, lng). lat/lng are None if they couldn't be
+    determined (e.g. Nominatim had no match and we fell back to a street
+    name guess).
+
+    Cache entries are dicts: {"neighborhood": ..., "lat": ..., "lng": ...}.
+    Older caches stored a plain neighborhood string; those are treated as a
+    known neighborhood with missing coordinates and re-geocoded once to
+    backfill lat/lng, then cached in the new format going forward.
     """
     key = address.strip().lower()
-    if key in cache:
-        return cache[key]
+    cached = cache.get(key)
+    known_neighborhood = None
+    if isinstance(cached, dict):
+        if cached.get("lat") is not None and cached.get("lng") is not None:
+            return cached.get("neighborhood"), cached.get("lat"), cached.get("lng")
+        known_neighborhood = cached.get("neighborhood")
+    elif isinstance(cached, str):
+        known_neighborhood = cached
 
     # Try street name first (instant, no API call)
     street_result = street_neighborhood(address)
@@ -357,30 +370,36 @@ def geocode_neighborhood(address, cache):
         results = r.json()
         time.sleep(1.1)  # Nominatim rate limit
 
-        if results and results[0].get("address"):
-            addr = results[0]["address"]
-            # Try these fields in order of specificity
-            neighborhood = (
-                addr.get("neighbourhood") or
-                addr.get("suburb") or
-                addr.get("quarter") or
-                addr.get("residential") or
-                street_result or
-                addr.get("city_district") or
-                "Macon"
-            )
-            cache[key] = neighborhood
+        if results:
+            top = results[0]
+            lat = float(top["lat"]) if top.get("lat") is not None else None
+            lng = float(top["lon"]) if top.get("lon") is not None else None
+            neighborhood = known_neighborhood
+            if not neighborhood and top.get("address"):
+                addr = top["address"]
+                # Try these fields in order of specificity
+                neighborhood = (
+                    addr.get("neighbourhood") or
+                    addr.get("suburb") or
+                    addr.get("quarter") or
+                    addr.get("residential") or
+                    street_result or
+                    addr.get("city_district") or
+                    "Macon"
+                )
+            neighborhood = neighborhood or street_result or "Macon"
+            cache[key] = {"neighborhood": neighborhood, "lat": lat, "lng": lng}
             save_geocache(cache)
-            return neighborhood
+            return neighborhood, lat, lng
     except Exception as e:
         log.warning("Geocode failed for %s: %s", address, e)
         time.sleep(1.1)
 
-    # Fall back to street name match
-    result = street_result or "Macon"
-    cache[key] = result
+    # Fall back to street name match, no coordinates
+    result = known_neighborhood or street_result or "Macon"
+    cache[key] = {"neighborhood": result, "lat": None, "lng": None}
     save_geocache(cache)
-    return result
+    return result, None, None
 
 def scrape_detail(post, outcomes_lookup=None, geocache=None):
     """Scrape a single hearing page, applying PDF outcomes where available."""
@@ -442,6 +461,11 @@ def scrape_detail(post, outcomes_lookup=None, geocache=None):
         hearing_dt = post["date"] + "T13:30:00" if not is_result else None
         item_id    = "MBPZ-{}-{}".format(post["date"], parcel)
 
+        if geocache is not None:
+            neighborhood, lat, lng = geocode_neighborhood(address, geocache)
+        else:
+            neighborhood, lat, lng = (street_neighborhood(address) or "Macon"), None, None
+
         items.append({
             "id":            item_id,
             "parcels":       parcels,
@@ -453,7 +477,9 @@ def scrape_detail(post, outcomes_lookup=None, geocache=None):
             "status_note":   snote,
             "status":        status,
             "intown":        is_intown(address),
-            "neighborhood":  geocode_neighborhood(address, geocache) if geocache is not None else (street_neighborhood(address) or "Macon"),
+            "neighborhood":  neighborhood,
+            "lat":           lat,
+            "lng":           lng,
             "hearing_date":  post["date"],
             "hearing":       hearing_dt,
             "submitted":     post["date"],
