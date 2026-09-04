@@ -187,6 +187,21 @@ def run():
     items = data.get("items", [])
 
     state = load_json(STATE_FILE, {})
+
+    if not state:
+        # Cold start: no baseline exists yet (first run ever, or the workflow
+        # wrote a placeholder {} because secrets weren't configured before).
+        # Every item would otherwise look "new", which would blast every
+        # subscriber with the entire scraped backlog. Instead, just record
+        # today's state as the baseline and send nothing this run.
+        baseline = {
+            item["id"]: {"status": item.get("status"), "hearing_reminded": True}
+            for item in items
+        }
+        save_json(STATE_FILE, baseline)
+        log.info("No alert baseline existed yet; recorded %d item(s) as the starting point. Nothing sent this run.", len(baseline))
+        return
+
     new_state = dict(state)
 
     # Figure out which events apply to which items, before touching subscribers.
