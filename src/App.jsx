@@ -1,11 +1,5 @@
 import { useState, useEffect } from "react";
 
-const INTOWN_NEIGHBORHOODS = [
-  "Vineville","Ingleside","College Hill","Beall's Hill",
-  "Huguenin Heights","Shirley Hills","Cherokee Heights","Rogers Avenue",
-  "Historic Macon","Downtown Macon","Midtown Macon"
-];
-
 const FALLBACK_DATA = [
   {
     id:"MCA-2026-0412", address:"1247 Vineville Ave", neighborhood:"Vineville", intown:true,
