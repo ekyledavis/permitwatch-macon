@@ -1,4 +1,3 @@
-import os
 #!/usr/bin/env python3
 """
 mbpz_scraper.py - Macon-Bibb P&Z hearing scraper with PDF result parsing
@@ -6,7 +5,7 @@ Compatible with Python 3.9+
 Dependencies: pip install requests beautifulsoup4 pdfplumber
 """
 
-import re, json, time, argparse, logging, io
+import os, re, json, time, argparse, logging, io
 from datetime import datetime, timedelta
 from urllib.parse import urljoin
 import requests
@@ -23,12 +22,37 @@ LISTING = "https://mbpz.org/category/hearing/"
 HEADERS = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"}
 
 INTOWN = [
-    "vineville", "ingleside", "college", "napier", "huguenin", "rogers",
-    "forsyth", "washington", "monroe", "spring", "orange", "bond",
-    "boulevard", "oglethorpe", "tattnall", "poplar", "mulberry", "cherry",
-    "walnut", "cotton", "riverside", "first", "second", "third", "fourth",
-    "beall", "holt", "coleman", "highland",
-    "anthony ave", "anthony st",
+    # Boundary streets
+    "coleman ave", "telfair st", "spring st", "new st",
+    "riverside dr", "madison st", "hardiman ave", "monroe st",
+    "forsyth st",
+
+    # Coleman Hill (Zone 1)
+    "rogers ave", "vineville ave", "walnut st", "college st",
+    "1st st", "2nd st", "3rd st", "4th st", "5th st",
+
+    # Washington Park (Zone 2)
+    "washington ave", "magnolia st", "mulberry st", "cherry st",
+    "poplar st", "craft st",
+
+    # Daisy Park (Zone 3)
+    "high st", "anderson ave", "holt ave", "orange st",
+    "duncan ave",
+
+    # Rose Park (Zone 4)
+    "oglethorpe st", "ash st", "maple st", "cole st",
+    "lee st", "hemlock st", "plum st",
+
+    # Huguenin Heights / Tattnall Square (Zone 5)
+    "tattnall st", "coleman ave", "adams st", "huguenin ave",
+    "napier ave", "ingleside ave", "boulevard",
+
+    # Beall's Hill (Zone 6)
+    "beall", "anthony ave", "anthony st", "elm st",
+
+    # Other intown streets
+    "bond st", "cotton ave", "ross st", "jefferson ave",
+    "jefferson ter", "highland ave", "holt ave",
 ]
 
 TYPES = {
