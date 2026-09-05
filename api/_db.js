@@ -43,6 +43,29 @@ async function ensureSchema() {
         created_at             TIMESTAMPTZ NOT NULL DEFAULT now(),
         updated_at             TIMESTAMPTZ NOT NULL DEFAULT now()
       );
+
+      CREATE TABLE IF NOT EXISTS comments (
+        id          SERIAL PRIMARY KEY,
+        permit_id   TEXT NOT NULL,
+        author      TEXT NOT NULL DEFAULT 'Neighbor',
+        text        TEXT NOT NULL,
+        sentiment   TEXT NOT NULL DEFAULT 'neutral'
+                      CHECK (sentiment IN ('support','oppose','neutral')),
+        created_at  TIMESTAMPTZ NOT NULL DEFAULT now()
+      );
+      CREATE INDEX IF NOT EXISTS comments_permit_id_idx ON comments (permit_id);
+
+      -- One row per (permit, anonymous browser id): lets a visitor switch
+      -- their vote without creating a real account, and without letting a
+      -- single browser stuff the count by voting repeatedly.
+      CREATE TABLE IF NOT EXISTS reactions (
+        permit_id   TEXT NOT NULL,
+        voter_id    TEXT NOT NULL,
+        reaction    TEXT NOT NULL
+                      CHECK (reaction IN ('support','oppose','neutral')),
+        updated_at  TIMESTAMPTZ NOT NULL DEFAULT now(),
+        PRIMARY KEY (permit_id, voter_id)
+      );
     `);
   }
   await schemaReady;

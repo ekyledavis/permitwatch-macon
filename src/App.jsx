@@ -63,6 +63,15 @@ function formatHearing(s){
     time:d.toLocaleTimeString("en-US",{hour:"numeric",minute:"2-digit"}),
   };
 }
+function formatCommentTime(iso){
+  if(!iso)return "";
+  const d=new Date(iso);
+  const mins=(Date.now()-d.getTime())/60000;
+  if(mins<1)return "just now";
+  if(mins<60)return `${Math.floor(mins)}m ago`;
+  if(mins<1440)return `${Math.floor(mins/60)}h ago`;
+  return d.toLocaleDateString("en-US",{month:"short",day:"numeric"});
+}
 function getStatusConfig(status){
   return STATUS_CONFIG[status] || {color:"#9CA3AF",bg:"rgba(156,163,175,0.12)",dot:"#9CA3AF"};
 }
@@ -186,10 +195,47 @@ export default function App(){
   const [alertSaving,setAlertSaving]=useState(false);
   const [commentText,setCommentText]=useState("");
   const [commentSentiment,setCommentSentiment]=useState("neutral");
+  const [commentAuthor,setCommentAuthor]=useState(()=>{
+    try{return localStorage.getItem("pw_comment_author")||"";}catch{return "";}
+  });
+  const [commentPosting,setCommentPosting]=useState(false);
+  const [activityError,setActivityError]=useState("");
+  const [voterId]=useState(()=>{
+    try{
+      let id=localStorage.getItem("pw_voter_id");
+      if(!id){
+        id=(crypto.randomUUID?crypto.randomUUID():`v-${Date.now()}-${Math.random().toString(36).slice(2)}`);
+        localStorage.setItem("pw_voter_id",id);
+      }
+      return id;
+    }catch{
+      return `v-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+    }
+  });
   const [exportMsg,setExportMsg]=useState("");
   const [calMonth,setCalMonth]=useState(new Date());
   const [newReaction,setNewReaction]=useState({});
   const [mapSelectedId,setMapSelectedId]=useState(null);
+
+  // Load real comments + reaction counts/my-vote whenever a permit's detail view opens
+  useEffect(()=>{
+    const permitId=selected?.id;
+    if(!permitId)return;
+    let cancelled=false;
+    setActivityError("");
+    fetch(`/api/permit-activity?permitId=${encodeURIComponent(permitId)}&voterId=${encodeURIComponent(voterId)}`)
+      .then(r=>r.json().then(data=>({ok:r.ok,data})))
+      .then(({ok,data})=>{
+        if(cancelled)return;
+        if(!ok)throw new Error(data.error||"Failed to load comments.");
+        const comments=data.comments.map(c=>({id:c.id,author:c.author,text:c.text,sentiment:c.sentiment,time:formatCommentTime(c.created_at)}));
+        setApps(prev=>prev.map(a=>a.id===permitId?{...a,comments,reactions:data.reactions}:a));
+        setSelected(prev=>prev&&prev.id===permitId?{...prev,comments,reactions:data.reactions}:prev);
+        setNewReaction(r=>({...r,[permitId]:data.myReaction||undefined}));
+      })
+      .catch(err=>{if(!cancelled)setActivityError(err.message||"Failed to load comments.");});
+    return ()=>{cancelled=true;};
+  },[selected?.id,voterId]);
 
   // Load data from scraper JSON, fall back to mock data
   useEffect(()=>{
@@ -225,20 +271,49 @@ export default function App(){
   function openDetail(app){setSelected(app);setView("detail");setCommentText("");}
 
   function addComment(appId){
-    if(!commentText.trim())return;
-    const nc={id:Date.now(),author:"You",time:"just now",text:commentText,sentiment:commentSentiment};
-    setApps(prev=>prev.map(a=>a.id===appId?{...a,comments:[...a.comments,nc]}:a));
-    setSelected(prev=>({...prev,comments:[...prev.comments,nc]}));
-    setCommentText("");
+    const text=commentText.trim();
+    if(!text||commentPosting)return;
+    setCommentPosting(true);
+    setActivityError("");
+    const author=commentAuthor.trim();
+    fetch("/api/comments",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({permitId:appId,author,text,sentiment:commentSentiment}),
+    })
+      .then(r=>r.json().then(data=>({ok:r.ok,data})))
+      .then(({ok,data})=>{
+        if(!ok)throw new Error(data.error||"Failed to post comment.");
+        const nc={id:data.id,author:data.author,text:data.text,sentiment:data.sentiment,time:formatCommentTime(data.created_at)};
+        setApps(prev=>prev.map(a=>a.id===appId?{...a,comments:[...a.comments,nc]}:a));
+        setSelected(prev=>prev&&prev.id===appId?{...prev,comments:[...prev.comments,nc]}:prev);
+        setCommentText("");
+        try{localStorage.setItem("pw_comment_author",author);}catch{/* ignore */}
+      })
+      .catch(err=>setActivityError(err.message||"Failed to post comment."))
+      .finally(()=>setCommentPosting(false));
   }
 
   function addReaction(appId,type){
     if(newReaction[appId]===type)return;
-    const pt=newReaction[appId];
-    const upd=prev=>{const r={...prev.reactions};if(pt)r[pt]=Math.max(0,r[pt]-1);r[type]=r[type]+1;return r;};
-    setApps(prev=>prev.map(a=>a.id!==appId?a:{...a,reactions:upd(a)}));
-    setSelected(prev=>!prev||prev.id!==appId?prev:{...prev,reactions:upd(prev)});
-    setNewReaction(r=>({...r,[appId]:type}));
+    const prevReaction=newReaction[appId];
+    setNewReaction(r=>({...r,[appId]:type})); // optimistic
+    fetch("/api/reactions",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({permitId:appId,voterId,reaction:type}),
+    })
+      .then(r=>r.json().then(data=>({ok:r.ok,data})))
+      .then(({ok,data})=>{
+        if(!ok)throw new Error(data.error||"Failed to save vote.");
+        setApps(prev=>prev.map(a=>a.id!==appId?a:{...a,reactions:data.reactions}));
+        setSelected(prev=>!prev||prev.id!==appId?prev:{...prev,reactions:data.reactions});
+        setNewReaction(r=>({...r,[appId]:data.myReaction}));
+      })
+      .catch(err=>{
+        setActivityError(err.message||"Failed to save vote.");
+        setNewReaction(r=>({...r,[appId]:prevReaction})); // roll back optimistic update
+      });
   }
 
   function exportApp(app){
@@ -578,6 +653,7 @@ export default function App(){
                   </div>
                 ))}
                 <div style={{paddingTop:4}}>
+                  <div style={{marginBottom:8}}><input className="input" placeholder="Your name (optional)" value={commentAuthor} onChange={e=>setCommentAuthor(e.target.value)} maxLength={60}/></div>
                   <div style={{marginBottom:8}}><textarea className="input" placeholder="Share your thoughts with the neighborhood..." value={commentText} onChange={e=>setCommentText(e.target.value)}/></div>
                   <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:8}}>
                     <div style={{display:"flex",gap:6}}>
@@ -587,8 +663,9 @@ export default function App(){
                         </button>
                       ))}
                     </div>
-                    <button className="btn btn-primary" onClick={()=>addComment(selected.id)}>Post Comment</button>
+                    <button className="btn btn-primary" disabled={commentPosting} onClick={()=>addComment(selected.id)}>{commentPosting?"Posting…":"Post Comment"}</button>
                   </div>
+                  {activityError&&<div className="asaved" style={{background:"#3A1B1B",color:"#F87171",borderColor:"#5C2626",marginTop:10}}>⚠️ {activityError}</div>}
                 </div>
               </div>
             </div>
