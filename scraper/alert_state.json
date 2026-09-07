@@ -76,7 +76,7 @@
     "hearing_reminded": true
   },
   "MBPZ-2026-09-14-O072-0119": {
-    "status": "Approved",
+    "status": "Pending Hearing",
     "hearing_reminded": true
   },
   "MBPZ-2026-09-14-O072-0201": {
@@ -156,7 +156,7 @@
     "hearing_reminded": true
   },
   "MBPZ-2026-09-08-O072-0119": {
-    "status": "Approved",
+    "status": "Under Review",
     "hearing_reminded": true
   },
   "MBPZ-2026-09-08-Q073-0418": {
@@ -292,7 +292,7 @@
     "hearing_reminded": true
   },
   "MBPZ-2026-07-27-K003-0157": {
-    "status": "Approved",
+    "status": "Decision Issued",
     "hearing_reminded": true
   },
   "MBPZ-2026-07-27-R073-0439": {
@@ -380,7 +380,7 @@
     "hearing_reminded": true
   },
   "MBPZ-2026-07-13-N041-0057": {
-    "status": "Denied",
+    "status": "Decision Issued",
     "hearing_reminded": true
   },
   "MBPZ-2026-07-13-N072-0428": {
@@ -440,7 +440,7 @@
     "hearing_reminded": true
   },
   "MBPZ-2026-06-22-K003-0157": {
-    "status": "Approved",
+    "status": "Decision Issued",
     "hearing_reminded": true
   },
   "MBPZ-2026-06-22-R073-0350": {
@@ -532,7 +532,7 @@
     "hearing_reminded": true
   },
   "MBPZ-2026-05-26-M030-0123": {
-    "status": "Approved",
+    "status": "Decision Issued",
     "hearing_reminded": true
   },
   "MBPZ-2026-05-26-N101-0125": {
@@ -576,7 +576,7 @@
     "hearing_reminded": true
   },
   "MBPZ-2026-05-11-Q074-0085": {
-    "status": "Approved",
+    "status": "Denied",
     "hearing_reminded": true
   },
   "MBPZ-2026-05-11-R081-0015": {
@@ -656,7 +656,7 @@
     "hearing_reminded": true
   },
   "MBPZ-2026-05-04-Q074-0085": {
-    "status": "Approved",
+    "status": "Denied",
     "hearing_reminded": true
   },
   "MBPZ-2026-05-04-R081-0015": {
@@ -672,23 +672,23 @@
     "hearing_reminded": true
   },
   "MBPZ-2026-04-27-P071-0469": {
-    "status": "Approved",
+    "status": "Under Review",
     "hearing_reminded": true
   },
   "MBPZ-2026-04-27-O072-0273": {
-    "status": "Approved",
+    "status": "Under Review",
     "hearing_reminded": true
   },
   "MBPZ-2026-04-27-K002-0004": {
-    "status": "Approved",
+    "status": "Under Review",
     "hearing_reminded": true
   },
   "MBPZ-2026-04-27-K007-0126": {
-    "status": "Approved",
+    "status": "Under Review",
     "hearing_reminded": true
   },
   "MBPZ-2026-04-27-Q091-0405": {
-    "status": "Approved",
+    "status": "Under Review",
     "hearing_reminded": true
   },
   "MBPZ-2026-04-27-Q091-0406": {
@@ -700,11 +700,11 @@
     "hearing_reminded": true
   },
   "MBPZ-2026-04-20-P071-0469": {
-    "status": "Approved",
+    "status": "Under Review",
     "hearing_reminded": true
   },
   "MBPZ-2026-04-20-O072-0273": {
-    "status": "Approved",
+    "status": "Under Review",
     "hearing_reminded": true
   },
   "MBPZ-2026-04-13-Q072-0054": {
@@ -716,7 +716,7 @@
     "hearing_reminded": true
   },
   "MBPZ-2026-04-13-Q073-0373": {
-    "status": "Approved",
+    "status": "Continued",
     "hearing_reminded": true
   },
   "MBPZ-2026-04-13-L051-0189": {
@@ -724,7 +724,7 @@
     "hearing_reminded": true
   },
   "MBPZ-2026-04-13-R072-0289": {
-    "status": "Denied",
+    "status": "Approved",
     "hearing_reminded": true
   },
   "MBPZ-2026-04-13-J009-0029": {
@@ -772,7 +772,7 @@
     "hearing_reminded": true
   },
   "MBPZ-2026-04-06-Q073-0373": {
-    "status": "Approved",
+    "status": "Continued",
     "hearing_reminded": true
   },
   "MBPZ-2026-04-06-R071-0316": {
@@ -796,7 +796,7 @@
     "hearing_reminded": true
   },
   "MBPZ-2026-03-23-O074-0366": {
-    "status": "Continued",
+    "status": "Approved",
     "hearing_reminded": true
   },
   "MBPZ-2026-03-23-Q081-0786": {
@@ -804,7 +804,7 @@
     "hearing_reminded": true
   },
   "MBPZ-2026-03-23-Q073-0373": {
-    "status": "Approved",
+    "status": "Continued",
     "hearing_reminded": true
   },
   "MBPZ-2026-03-23-P073-0375": {
@@ -832,7 +832,7 @@
     "hearing_reminded": true
   },
   "MBPZ-2026-03-23-N041-0014": {
-    "status": "Withdrawn",
+    "status": "Under Review",
     "hearing_reminded": true
   },
   "MBPZ-2026-03-23-Q093-0179": {
@@ -864,7 +864,7 @@
     "hearing_reminded": true
   },
   "MBPZ-2026-03-16-Q073-0373": {
-    "status": "Approved",
+    "status": "Continued",
     "hearing_reminded": true
   },
   "MBPZ-2026-03-16-O074-0003": {
@@ -872,7 +872,7 @@
     "hearing_reminded": true
   },
   "MBPZ-2026-03-16-O074-0366": {
-    "status": "Continued",
+    "status": "Approved",
     "hearing_reminded": true
   },
   "MBPZ-2026-03-09-Q074-0011": {
@@ -892,7 +892,7 @@
     "hearing_reminded": true
   },
   "MBPZ-2026-03-09-O074-0366": {
-    "status": "Continued",
+    "status": "Approved",
     "hearing_reminded": true
   },
   "MBPZ-2026-03-09-P071-0023": {
