@@ -86,12 +86,6 @@ no shared code between them:**
      (so reruns don't re-send), and sends via the Resend API.
      `send_test_alert.py` is a manual-only variant for sending one test
      email pass to all subscribers.
-   - The other scripts in this directory (`add_geocoding.py`, `debug3.py`,
-     `debug4.py`, `debug_parse.py`, `diagnose.py`, `diagnose2.py`,
-     `mbpz_scraper_backup.py`, `patch_scraper.py`, `write_scraper.py`) are
-     one-off debugging/patch tools from past sessions, not part of the
-     regular pipeline or invoked by any workflow — don't treat them as
-     canonical.
 
 **Data contract**: `public/permitwatch_data.json` (`{ items: [...],
 scraped_at, ... }`) is the handoff from the scraper to the frontend; each
