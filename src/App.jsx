@@ -39,6 +39,8 @@ const STATUS_CONFIG = {
   "Decision Issued":       {color:"#10B981", bg:"rgba(16,185,129,0.12)",  dot:"#10B981"},
   "Withdrawn":             {color:"#6B7280", bg:"rgba(107,114,128,0.12)", dot:"#6B7280"},
   "Continued":             {color:"#F59E0B", bg:"rgba(245,158,11,0.12)",  dot:"#F59E0B"},
+  "Tabled":                {color:"#F59E0B", bg:"rgba(245,158,11,0.12)",  dot:"#F59E0B"},
+  "No Action":             {color:"#6B7280", bg:"rgba(107,114,128,0.12)", dot:"#6B7280"},
   "Violation / Revocation":{color:"#EF4444", bg:"rgba(239,68,68,0.12)",   dot:"#EF4444"},
 };
 
@@ -329,7 +331,7 @@ export default function App(){
   const hByDay={};
   hearingDates.forEach(a=>{if(a.hp.getFullYear()===calYear&&a.hp.getMonth()===calMN){const d=a.hp.getDate();if(!hByDay[d])hByDay[d]=[];hByDay[d].push(a);}});
 
-  const statuses=["All","Under Review","Pending Hearing","Approved","Denied","Withdrawn","Continued"];
+  const statuses=["All","Under Review","Pending Hearing","Approved","Denied","Withdrawn","Continued","Tabled","No Action","Decision Issued"];
 
   const IntownToggle=()=>(
     <button onClick={()=>setIntownOnly(v=>!v)} style={{display:"flex",alignItems:"center",gap:7,padding:"6px 13px",border:`1px solid ${intownOnly?"#4F6BFF":"#2A2E42"}`,borderRadius:20,background:intownOnly?"#4F6BFF18":"transparent",color:intownOnly?"#7E9AFF":"#6B7280",cursor:"pointer",fontFamily:"inherit",fontSize:12,fontWeight:600,transition:"all .15s",flexShrink:0,whiteSpace:"nowrap"}}>
@@ -390,41 +392,6 @@ export default function App(){
         @keyframes su{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
         .asaved{background:#10B98120;border:1px solid #10B981;border-radius:10px;padding:10px 16px;color:#10B981;font-size:13px;font-weight:500;margin-top:12px;display:flex;align-items:center;gap:8px;}
         a{color:#7E9AFF;text-decoration:none;}.a:hover{text-decoration:underline;}
-        @media(max-width:768px){
-          .nav-tab{font-size:11px;padding:6px 8px;}
-          .hide-mobile{display:none!important;}
-          .stack-mobile{flex-direction:column!important;align-items:flex-start!important;}
-          .full-mobile{width:100%!important;}
-          .grid-mobile{grid-template-columns:1fr!important;}
-        }
-        @media(max-width:768px){
-          .nav-tab{font-size:11px;padding:6px 8px;}
-          .hide-mobile{display:none!important;}
-          .stack-mobile{flex-direction:column!important;align-items:flex-start!important;}
-          .full-mobile{width:100%!important;}
-          .grid-mobile{grid-template-columns:1fr!important;}
-        }
-        @media(max-width:768px){
-          .nav-tab{font-size:11px;padding:6px 8px;}
-          .hide-mobile{display:none!important;}
-          .stack-mobile{flex-direction:column!important;align-items:flex-start!important;}
-          .full-mobile{width:100%!important;}
-          .grid-mobile{grid-template-columns:1fr!important;}
-        }
-        @media(max-width:768px){
-          .nav-tab{font-size:11px;padding:6px 8px;}
-          .hide-mobile{display:none!important;}
-          .stack-mobile{flex-direction:column!important;align-items:flex-start!important;}
-          .full-mobile{width:100%!important;}
-          .grid-mobile{grid-template-columns:1fr!important;}
-        }
-        @media(max-width:768px){
-          .nav-tab{font-size:11px;padding:6px 8px;}
-          .hide-mobile{display:none!important;}
-          .stack-mobile{flex-direction:column!important;align-items:flex-start!important;}
-          .full-mobile{width:100%!important;}
-          .grid-mobile{grid-template-columns:1fr!important;}
-        }
         @media(max-width:768px){
           .nav-tab{font-size:11px;padding:6px 8px;}
           .hide-mobile{display:none!important;}
