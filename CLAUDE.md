@@ -111,12 +111,6 @@ item's `id` is also the join key (`permit_id`) for the `comments` and
   `RESEND_API_KEY` repo secrets for the alert step to actually send.
 - `send-test-alert.yml` — manual-only trigger for `send_test_alert.py`.
 
-**Legacy cruft**: the top-level `permitwatch/` directory is an accidental
-early duplicate upload of an older, simpler single-stage version of this app
-(separate `mbpz_scraper.py`/`mbpz_to_permitwatch.py` pair, no `api/` backend).
-It isn't referenced by the build, deploy config, or workflows — ignore it
-rather than editing it.
-
 **Deployment**: Vercel (`vercel.json`, standard CRA build). The `api/`
 functions and the scraper's alert step both need `POSTGRES_URL`/
 `NILEDB_POSTGRES_URL` and (for alerts) `RESEND_API_KEY` configured as
