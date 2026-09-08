@@ -58,16 +58,41 @@ no shared code between them:**
    (req, res) => {...}`), the backend for the "live" community features:
    - `_db.js` — shared Postgres pool (Nile via Vercel Storage;
      `POSTGRES_URL` or `NILEDB_POSTGRES_URL`) and `ensureSchema()`, which
-     idempotently creates `subscribers`, `comments`, and `reactions` on
-     first use — there's no separate migration step.
+     idempotently creates/migrates `subscribers`, `comments`, `reactions`
+     on first use via `CREATE TABLE IF NOT EXISTS` + `ALTER TABLE ... ADD
+     COLUMN IF NOT EXISTS` — there's no separate migration step or tool.
    - `_geocode.js` — shared Nominatim geocoding helper (same free,
      no-API-key service the scraper uses).
+   - `_rateLimit.js` — shared Postgres-backed fixed-window rate limiter
+     (table `rate_limits`, keyed by `endpoint:ip:windowStart`); every
+     write endpoint below calls it and returns 429 + `Retry-After` when
+     over its limit. It's meant to blunt casual spam/vote-stuffing, not
+     defend against a determined attacker rotating IPs.
    - `comments.js` (POST, insert), `reactions.js` (POST, upsert one
      `(permit_id, voter_id)` row and return updated counts),
      `permit-activity.js` (GET, combined comments + reaction counts +
      the caller's own reaction for one permit), `subscribe.js` (POST,
-     geocode + upsert an alert subscription by email).
+     geocode + upsert an alert subscription by email — see verification
+     note below), `confirm.js` (GET, the link a subscriber clicks in
+     their confirmation email; renders a small HTML page, not JSON).
    Any of these will 500 if `POSTGRES_URL`/`NILEDB_POSTGRES_URL` isn't set.
+
+   **Subscriber email verification (double opt-in)**: `subscribe.js`
+   never emails alerts to an address on the strength of a form submission
+   alone. A new subscriber gets a random `confirm_token` and stays
+   unverified (`verified_at IS NULL`) until they click the emailed link,
+   which `confirm.js` uses to stamp `verified_at` and clear the token.
+   `scraper/send_alerts.py`'s `fetch_subscribers()` only selects
+   `verified_at IS NOT NULL` rows, so unconfirmed signups are silently
+   excluded from alerts rather than erroring. Subscribers who existed
+   before this feature were grandfathered in as verified by a one-time
+   backfill in `ensureSchema()` (matched on having no `confirm_token`,
+   since a real new signup always gets one) — don't remove that backfill
+   without checking it's already run in production. Sending the
+   confirmation email itself needs `RESEND_API_KEY` (and optionally
+   `RESEND_FROM_EMAIL`) set as a **Vercel** environment variable — this is
+   separate from the same-named GitHub Actions secret the scraper uses,
+   since `subscribe.js` runs on Vercel, not in CI.
 
 3. **`scraper/`** — Python, unrelated to the Node toolchain.
    - `mbpz_scraper.py` is the whole pipeline in one script: crawls
