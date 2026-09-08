@@ -193,6 +193,7 @@ export default function App(){
     demolition:true, newComment:false,
   });
   const [alertSaved,setAlertSaved]=useState(false);
+  const [alertNeedsConfirmation,setAlertNeedsConfirmation]=useState(false);
   const [alertError,setAlertError]=useState("");
   const [alertSaving,setAlertSaving]=useState(false);
   const [commentText,setCommentText]=useState("");
@@ -757,7 +758,8 @@ export default function App(){
                 const data=await r.json().catch(()=>({}));
                 if(!r.ok)throw new Error(data.error||"Something went wrong. Please try again.");
                 setAlertSaved(true);
-                setTimeout(()=>setAlertSaved(false),4000);
+                setAlertNeedsConfirmation(!!data.needsConfirmation);
+                setTimeout(()=>setAlertSaved(false),data.needsConfirmation?8000:4000);
               }catch(err){
                 setAlertError(err.message||"Something went wrong. Please try again.");
               }finally{
@@ -767,7 +769,13 @@ export default function App(){
               {alertSaving?"Saving…":"Save Alert Preferences"}
             </button>
             {alertError&&<div className="asaved" style={{background:"#3A1B1B",color:"#F87171",borderColor:"#5C2626"}}>⚠️ {alertError}</div>}
-            {alertSaved&&<div className="asaved">✅ Alerts active for {intownOnly?"Intown Macon":"all of Macon"} within {alertRadius} miles</div>}
+            {alertSaved&&(
+              <div className="asaved">
+                {alertNeedsConfirmation
+                  ? `📧 Almost there — check ${alertEmail} for a confirmation link to activate your alerts.`
+                  : `✅ Alerts active for ${intownOnly?"Intown Macon":"all of Macon"} within ${alertRadius} miles`}
+              </div>
+            )}
           </div>
         )}
 

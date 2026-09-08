@@ -59,6 +59,12 @@ def haversine_miles(lat1, lng1, lat2, lng2):
 
 
 def fetch_subscribers(conn):
+    """
+    Returns only subscribers who have confirmed their email address (see
+    api/subscribe.js + api/confirm.js for the double opt-in flow). The
+    ALTER/backfill statements here mirror api/_db.js's ensureSchema() so this
+    works even against a database the Node API hasn't touched yet.
+    """
     with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
         cur.execute("""
             CREATE TABLE IF NOT EXISTS subscribers (
@@ -78,9 +84,18 @@ def fetch_subscribers(conn):
                 created_at             TIMESTAMPTZ NOT NULL DEFAULT now(),
                 updated_at             TIMESTAMPTZ NOT NULL DEFAULT now()
             );
+
+            ALTER TABLE subscribers ADD COLUMN IF NOT EXISTS verified_at TIMESTAMPTZ;
+            ALTER TABLE subscribers ADD COLUMN IF NOT EXISTS confirm_token TEXT;
+            ALTER TABLE subscribers ADD COLUMN IF NOT EXISTS confirm_token_expires_at TIMESTAMPTZ;
+            CREATE UNIQUE INDEX IF NOT EXISTS subscribers_confirm_token_idx
+                ON subscribers (confirm_token) WHERE confirm_token IS NOT NULL;
+
+            UPDATE subscribers SET verified_at = created_at
+                WHERE verified_at IS NULL AND confirm_token IS NULL;
         """)
         conn.commit()
-        cur.execute("SELECT * FROM subscribers")
+        cur.execute("SELECT * FROM subscribers WHERE verified_at IS NOT NULL")
         return cur.fetchall()
 
 
