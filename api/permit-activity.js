@@ -1,10 +1,18 @@
 const { getPool, ensureSchema } = require("./_db");
+const { rateLimit } = require("./_rateLimit");
 
 const EMPTY_REACTIONS = { support: 0, oppose: 0, neutral: 0 };
 
 module.exports = async (req, res) => {
   if (req.method !== "GET") {
     res.status(405).json({ error: "Method not allowed" });
+    return;
+  }
+
+  const { allowed, retryAfterSeconds } = await rateLimit(req, "permit-activity", 60, 60); // 60/min/IP
+  if (!allowed) {
+    res.setHeader("Retry-After", String(retryAfterSeconds));
+    res.status(429).json({ error: "Too many requests from this network. Please slow down." });
     return;
   }
 

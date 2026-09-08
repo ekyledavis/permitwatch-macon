@@ -44,6 +44,27 @@ async function ensureSchema() {
         updated_at             TIMESTAMPTZ NOT NULL DEFAULT now()
       );
 
+      -- Email verification (double opt-in): a new subscriber gets a random
+      -- confirm_token and stays unverified (verified_at IS NULL) until they
+      -- click the link in their confirmation email, which clears the token
+      -- and stamps verified_at. Only verified subscribers are emailed
+      -- alerts (see scraper/send_alerts.py).
+      ALTER TABLE subscribers ADD COLUMN IF NOT EXISTS verified_at TIMESTAMPTZ;
+      ALTER TABLE subscribers ADD COLUMN IF NOT EXISTS confirm_token TEXT;
+      ALTER TABLE subscribers ADD COLUMN IF NOT EXISTS confirm_token_expires_at TIMESTAMPTZ;
+      CREATE UNIQUE INDEX IF NOT EXISTS subscribers_confirm_token_idx
+        ON subscribers (confirm_token) WHERE confirm_token IS NOT NULL;
+
+      -- One-time backfill for rows that existed before email verification
+      -- was added: they were trusted under the old rules, so grandfather
+      -- them in as verified rather than silently cutting off their alerts.
+      -- A genuinely new signup always gets a confirm_token at insert time,
+      -- so it's correctly excluded here and stays unverified until
+      -- confirmed. Safe to run on every deploy: once a row is backfilled
+      -- (or ever confirmed for real), this WHERE clause no longer matches it.
+      UPDATE subscribers SET verified_at = created_at
+        WHERE verified_at IS NULL AND confirm_token IS NULL;
+
       CREATE TABLE IF NOT EXISTS comments (
         id          SERIAL PRIMARY KEY,
         permit_id   TEXT NOT NULL,

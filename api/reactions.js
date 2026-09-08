@@ -1,4 +1,5 @@
 const { getPool, ensureSchema } = require("./_db");
+const { rateLimit } = require("./_rateLimit");
 
 const VALID_REACTIONS = new Set(["support", "oppose", "neutral"]);
 const EMPTY_REACTIONS = { support: 0, oppose: 0, neutral: 0 };
@@ -6,6 +7,13 @@ const EMPTY_REACTIONS = { support: 0, oppose: 0, neutral: 0 };
 module.exports = async (req, res) => {
   if (req.method !== "POST") {
     res.status(405).json({ error: "Method not allowed" });
+    return;
+  }
+
+  const { allowed, retryAfterSeconds } = await rateLimit(req, "reactions", 30, 300); // 30/5min/IP
+  if (!allowed) {
+    res.setHeader("Retry-After", String(retryAfterSeconds));
+    res.status(429).json({ error: "Too many votes from this network. Please try again in a few minutes." });
     return;
   }
 

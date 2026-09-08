@@ -1,4 +1,5 @@
 const { getPool, ensureSchema } = require("./_db");
+const { rateLimit } = require("./_rateLimit");
 
 const VALID_SENTIMENTS = new Set(["support", "oppose", "neutral"]);
 const MAX_TEXT_LENGTH = 2000;
@@ -7,6 +8,13 @@ const MAX_AUTHOR_LENGTH = 60;
 module.exports = async (req, res) => {
   if (req.method !== "POST") {
     res.status(405).json({ error: "Method not allowed" });
+    return;
+  }
+
+  const { allowed, retryAfterSeconds } = await rateLimit(req, "comments", 5, 600); // 5/10min/IP
+  if (!allowed) {
+    res.setHeader("Retry-After", String(retryAfterSeconds));
+    res.status(429).json({ error: "Too many comments from this network. Please try again in a few minutes." });
     return;
   }
 
