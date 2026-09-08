@@ -289,7 +289,7 @@ STREET_NEIGHBORHOOD_MAP = [
       "orange st", "washington ave", "monroe st"],               "Midtown Macon"),
     # Other Macon areas
     (["riverside dr", "riverside rd"],                           "Riverside"),
-    (["riverside dr", "shirley hills"],                          "Shirley Hills"),
+    (["shirley hills"],                                          "Shirley Hills"),
     (["mercer university", "columbus rd"],                        "North Macon"),
     (["hartley bridge", "hartley rd"],                           "South Macon"),
     (["bass rd", "bass lake"],                                   "North Macon"),
