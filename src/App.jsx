@@ -92,18 +92,22 @@ function haversineMiles(lat1,lng1,lat2,lng2){
 // Approximate "intown" boundary — the scraper flags a permit intown purely by
 // matching its address against a street-name list (scraper/mbpz_scraper.py's
 // INTOWN), not a real polygon, so there's no authoritative geometry to draw.
-// This ring is a convex hull over real, geocoded points for that same street
-// list's boundary streets (Coleman Ave, Telfair St, Riverside Dr, ...) plus
-// the intown neighborhood centroids below — a visual approximation, not the
-// literal rule, but anchored to real streets on the OSM basemap instead of
-// hand-picked numbers.
+// This ring is anchored to real geocoded points for that same street list's
+// boundary streets (Coleman Ave, Telfair St, Spring St, Riverside Dr), plus
+// actual I-75 centerline coordinates (pulled from OpenStreetMap) along the
+// west/northwest edge — not a straight chord between two points, since I-75
+// curves away to the northwest here and a chord would cut across to the
+// wrong (west) side of it. The ring's northernmost vertex is I-75's own bend
+// closest to downtown (~32.8566N), so the boundary never extends north of
+// the interstate. It's still a visual approximation, not the literal rule.
 const INTOWN_BOUNDARY=[
-  [32.846,-83.661],   // Huguenin Heights
-  [32.857,-83.656],   // Ingleside
-  [32.860,-83.644],   // Cherokee Heights
-  [32.8364,-83.6194], // Riverside Dr, near the Ocmulgee River
-  [32.8253,-83.6426], // Telfair St
-  [32.8347,-83.6522], // Coleman Ave
+  [32.8347,-83.6522],   // Coleman Ave (SW anchor)
+  [32.8430,-83.6445],   // I-75, near Huguenin Heights/Beall's Hill
+  [32.8500,-83.6423],   // I-75, continuing north
+  [32.8566,-83.6409],   // I-75's bend closest to downtown — northern cap
+  [32.8441,-83.6297],   // Spring St (swings back southeast toward downtown)
+  [32.8364,-83.6194],   // Riverside Dr, near the Ocmulgee River (east anchor)
+  [32.8253,-83.6426],   // Telfair St (south anchor)
 ];
 const NEIGHBORHOODS=[
   {n:"Vineville",lat:32.853,lng:-83.648,it:true},{n:"Ingleside",lat:32.857,lng:-83.656,it:true},
