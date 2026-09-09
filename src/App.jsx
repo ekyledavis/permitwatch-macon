@@ -89,32 +89,41 @@ function haversineMiles(lat1,lng1,lat2,lng2){
 }
 
 // ── Map ───────────────────────────────────────────────────────────────────────
-// Approximate "intown" boundary — the scraper flags a permit intown purely by
-// matching its address against a street-name list (scraper/mbpz_scraper.py's
-// INTOWN), not a real polygon, so there's no authoritative geometry to draw.
-// This ring is anchored to real geocoded points for that same street list's
-// boundary streets (Coleman Ave, Telfair St, Spring St, Riverside Dr), plus
-// actual I-75 centerline coordinates (pulled from OpenStreetMap) along the
-// west/northwest edge — not a straight chord between two points, since I-75
-// curves away to the northwest here and a chord would cut across to the
-// wrong (west) side of it. The ring's northernmost vertex is I-75's own bend
-// closest to downtown (~32.8566N), so the boundary never extends north of
-// the interstate. It's still a visual approximation, not the literal rule.
+// Actual "intown" boundary, traced from the Intown Macon Neighborhood
+// Association's own reference map ("InTown Macon Neighborhood Zone Map",
+// Appendix B — the 6 zones: Coleman Hill, Washington Park, Daisy Park, Rose
+// Park, Huguenin Heights/Tattnall Square, Beall's Hill), not a guess. That
+// map is a hand-drawn overlay on a street basemap with no published
+// coordinates, so this ring was built by georeferencing it: fitting an
+// affine transform from several of its landmarks (Tattnall Square, Anderson
+// Park, Rose Park, Lanier Park, Jack Tarver Library, Bibb County Courthouse,
+// Dunlap Park) to their real geocoded lat/lng, then converting the traced
+// boundary path through that transform. It follows the real street grid the
+// reference map itself uses — Riverside Dr and Madison St (north), Spring St
+// then a zigzag along New St/1st St (east), Telfair St (south), Coleman Ave
+// and Forsyth St (west), Hardiman Ave (northwest) — rather than a simple
+// convex shape, so it's still an approximation of the association's own
+// polygon, not survey-grade, but no longer an independent guess.
 const INTOWN_BOUNDARY=[
-  [32.8347,-83.6522],   // Coleman Ave (SW anchor)
-  [32.8430,-83.6445],   // I-75, near Huguenin Heights/Beall's Hill
-  [32.8500,-83.6423],   // I-75, continuing north
-  [32.8566,-83.6409],   // I-75's bend closest to downtown — northern cap
-  [32.8441,-83.6297],   // Spring St (swings back southeast toward downtown)
-  [32.8364,-83.6194],   // Riverside Dr, near the Ocmulgee River (east anchor)
-  [32.8253,-83.6426],   // Telfair St (south anchor)
-];
-const NEIGHBORHOODS=[
-  {n:"Vineville",lat:32.853,lng:-83.648,it:true},{n:"Ingleside",lat:32.857,lng:-83.656,it:true},
-  {n:"College Hill",lat:32.840,lng:-83.638,it:true},{n:"Beall's Hill",lat:32.844,lng:-83.645,it:true},
-  {n:"Huguenin Heights",lat:32.846,lng:-83.661,it:true},{n:"Shirley Hills",lat:32.832,lng:-83.689,it:false},
-  {n:"Downtown",lat:32.835,lng:-83.627,it:false},{n:"Midtown",lat:32.848,lng:-83.633,it:false},
-  {n:"Cherokee Heights",lat:32.860,lng:-83.644,it:true},
+  [32.84881,-83.63723], // Riverside Dr / Madison St (north point, near Riverside Cemetery)
+  [32.84336,-83.62923], // Riverside Dr ∩ Spring St
+  [32.83747,-83.6315],  // Spring St bend
+  [32.83548,-83.63627], // corner near Lanier Park / US-41
+  [32.83386,-83.63808], // zigzag, Rose Park's east edge
+  [32.83287,-83.63644],
+  [32.83147,-83.63761],
+  [32.83048,-83.63609],
+  [32.82919,-83.63765], // Telfair St ∩ 1st St
+  [32.82456,-83.6429],  // Telfair St, south point (Beall's Hill)
+  [32.82527,-83.64353],
+  [32.82708,-83.64458],
+  [32.82909,-83.64562],
+  [32.83079,-83.64635],
+  [32.83229,-83.64666], // Coleman Ave, near Tattnall Square
+  [32.83521,-83.64473], // Forsyth St curve
+  [32.83815,-83.64313],
+  [32.84081,-83.64226], // Hardiman Ave bend
+  [32.84129,-83.64004], // Hardiman Ave ∩ Madison St, near Mercer Law School
 ];
 const MACON_CENTER=[32.8407,-83.6324];
 
@@ -218,13 +227,6 @@ function MapView({apps,onSelect,selectedId,intownOnly}){
             fillOpacity:intownOnly?0.08:0.03,
             opacity:intownOnly?1:0.5,
           }}/>
-          {NEIGHBORHOODS.map(n=>(
-            <Marker key={n.n} position={[n.lat,n.lng]} icon={L.divIcon({
-              className:"pw-label",
-              html:`<div style="transform:translate(-50%,-50%);color:${n.it?"#7E9AFF":"#4A5068"};font:700 10px 'DM Sans',sans-serif;letter-spacing:.4px;white-space:nowrap;text-shadow:0 1px 3px #0D1018,0 0 8px #0D1018">${n.n.toUpperCase()}</div>`,
-              iconSize:[0,0],
-            })} interactive={false}/>
-          ))}
           {apps.filter(a=>a.lat&&a.lng).map(app=>(
             <Marker key={app.id} position={[app.lat,app.lng]}
               icon={markerIcon(app,selectedId===app.id,hoverId===app.id)}
