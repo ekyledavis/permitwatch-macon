@@ -29,7 +29,11 @@ INTOWN = [
 
     # Coleman Hill (Zone 1)
     "rogers ave", "vineville ave", "walnut st", "college st",
+    # Numbered streets appear in MBPZ listings spelled out ("First St"),
+    # not as numerals ("1st St") — list both forms so the substring match
+    # doesn't miss real addresses on either spelling.
     "1st st", "2nd st", "3rd st", "4th st", "5th st",
+    "first st", "second st", "third st", "fourth st", "fifth st",
 
     # Washington Park (Zone 2)
     "washington ave", "magnolia st", "mulberry st", "cherry st",
@@ -506,8 +510,11 @@ def scrape_detail(post, outcomes_lookup=None, geocache=None):
         else:
             status = "Under Review"
 
-        is_result  = "result" in post["post_type"].lower()
-        hearing_dt = post["date"] + "T13:30:00" if not is_result else None
+        # The hearing date is known either way — a "results" post is just
+        # the outcome of a hearing that already happened on post["date"].
+        # Don't null it out once the decision is in; the frontend uses
+        # status (not hearing-date presence) to tell past from upcoming.
+        hearing_dt = post["date"] + "T13:30:00"
         item_id    = "MBPZ-{}-{}".format(post["date"], parcel)
 
         if geocache is not None:

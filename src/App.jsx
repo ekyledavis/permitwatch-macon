@@ -436,6 +436,11 @@ export default function App(){
   const hearingDates=filteredApps.filter(a=>a.hearing).map(a=>({...a,hp:new Date(a.hearing)}));
   const hByDay={};
   hearingDates.forEach(a=>{if(a.hp.getFullYear()===calYear&&a.hp.getMonth()===calMN){const d=a.hp.getDate();if(!hByDay[d])hByDay[d]=[];hByDay[d].push(a);}});
+  // "Upcoming Hearings" means upcoming — the calendar grid above still shows
+  // every month (including past ones you navigate back to), but this list
+  // and its count should only ever show hearings that haven't happened yet.
+  const now=new Date();
+  const upcomingHearings=hearingDates.filter(a=>a.hp>=now).sort((a,b)=>a.hp-b.hp);
 
   const statuses=["All","Under Review","Pending Hearing","Approved","Denied","Withdrawn","Continued","Tabled","No Action","Decision Issued"];
 
@@ -751,7 +756,7 @@ export default function App(){
             <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:20,flexWrap:"wrap",gap:10}}>
               <div>
                 <h1 style={{fontSize:22,fontWeight:700,letterSpacing:"-.5px"}}>Hearing Calendar</h1>
-                <p style={{color:"#6B7280",fontSize:13,marginTop:3}}>{hearingDates.length} upcoming{intownOnly?" · Intown only":""}</p>
+                <p style={{color:"#6B7280",fontSize:13,marginTop:3}}>{upcomingHearings.length} upcoming{intownOnly?" · Intown only":""}</p>
               </div>
               <div style={{display:"flex",alignItems:"center",gap:10,flexWrap:"wrap"}}>
                 <IntownToggle/>
@@ -779,7 +784,7 @@ export default function App(){
             </div>
             <div style={{marginTop:24}}>
               <div style={{color:"#6B7280",fontSize:11,fontWeight:600,textTransform:"uppercase",letterSpacing:".8px",marginBottom:12}}>Upcoming Hearings</div>
-              {hearingDates.sort((a,b)=>a.hp-b.hp).map(a=>{
+              {upcomingHearings.map(a=>{
                 const sc=getStatusConfig(a.status);const h=formatHearing(a.hearing);
                 return(
                   <div key={a.id} className="card" style={{padding:"14px 18px",marginBottom:8,display:"flex",alignItems:"center",gap:16,cursor:"pointer"}} onClick={()=>openDetail(a)}>
@@ -798,7 +803,7 @@ export default function App(){
                   </div>
                 );
               })}
-              {hearingDates.length===0&&<div style={{color:"#4A5068",fontSize:13,textAlign:"center",padding:"32px"}}>No upcoming hearings match your filters</div>}
+              {upcomingHearings.length===0&&<div style={{color:"#4A5068",fontSize:13,textAlign:"center",padding:"32px"}}>No upcoming hearings match your filters</div>}
             </div>
           </div>
         )}
