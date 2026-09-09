@@ -49,12 +49,18 @@ no shared code between them:**
    scroll/pinch-to-zoom, and has an address-search box that calls
    `/api/geocode` to drop a pin, fly the map there, and list the nearest
    permits by haversine distance. The dashed "intown" boundary drawn on the
-   map (`INTOWN_BOUNDARY`) is only a visual approximation — a convex hull
-   over a handful of geocoded boundary-street points and neighborhood
-   centroids — because the actual intown determination
-   (`scraper/mbpz_scraper.py`'s `is_intown()`) is plain substring matching
-   against a street-name list, not a real polygon, so there's no
-   authoritative geometry to draw exactly. On mount it also
+   map (`INTOWN_BOUNDARY`) is traced and georeferenced from the Intown Macon
+   Neighborhood Association's own reference map ("InTown Macon Neighborhood
+   Zone Map", Appendix B) — not exact survey geometry, but the real
+   association boundary rather than a guess. `scraper/mbpz_scraper.py` keeps
+   an identical copy of these same coordinates (`INTOWN_BOUNDARY` there too —
+   keep both in sync if the boundary is ever redrawn) and uses real
+   point-in-polygon containment as the authoritative `is_intown()` check once
+   an address is geocoded; the street-name substring list (`INTOWN`) is only
+   a fallback for addresses that fail to geocode, since street names alone
+   can't tell a genuinely intown address from one miles down the same road —
+   Vineville Ave, Riverside Dr, Napier Ave, Holt Ave, and Forsyth St all
+   extend well past the district's real edge. On mount it also
    `fetch("/permitwatch_data.json")` for the permit list
    (falling back to a hardcoded `FALLBACK_DATA` array if that fails), then
    per-permit `fetch("/api/permit-activity?permitId=...&voterId=...")` for
@@ -113,8 +119,10 @@ no shared code between them:**
    - `mbpz_scraper.py` is the whole pipeline in one script: crawls
      `mbpz.org/category/hearing/`, parses hearing agenda/results pages
      (including PDF results via `pdfplumber`), geocodes addresses
-     (cached in `scraper/geocode_cache.json`), tags neighborhood/`intown`
-     status from the `INTOWN` street list, and writes
+     (cached in `scraper/geocode_cache.json`), tags each item's neighborhood
+     from `STREET_NEIGHBORHOOD_MAP` and its `intown` status via real
+     point-in-polygon containment against `INTOWN_BOUNDARY` (falling back to
+     the `INTOWN` street-name list only when geocoding failed), and writes
      **directly to `public/permitwatch_data.json`** in the shape the app
      consumes. **`mbpz_to_permitwatch.py` is dead code** — an older
      separate transform stage that nothing invokes anymore (the workflow

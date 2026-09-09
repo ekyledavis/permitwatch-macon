@@ -95,7 +95,56 @@ def ntype(t):
     return "Other"
 
 
-def is_intown(a):
+# The Intown Macon Neighborhood Association's actual boundary ("InTown
+# Macon Neighborhood Zone Map", Appendix B — Coleman Hill, Washington Park,
+# Daisy Park, Rose Park, Huguenin Heights/Tattnall Square, Beall's Hill),
+# traced and georeferenced the same way as src/App.jsx's INTOWN_BOUNDARY —
+# keep the two in sync if this ever changes. Used as the authoritative check
+# once an address is geocoded; INTOWN (substring match) is only a fallback
+# for addresses that fail to geocode, since street names alone can't tell
+# "1247 Vineville Ave" (intown) from "2713 Vineville Ave" (miles away) —
+# Vineville Ave, Riverside Dr, Napier Ave, Holt Ave and Forsyth St all run
+# well past the district's real edge.
+INTOWN_BOUNDARY = [
+    (32.84881, -83.63723),  # Riverside Dr / Madison St (north point)
+    (32.84336, -83.62923),  # Riverside Dr ∩ Spring St
+    (32.83747, -83.6315),   # Spring St bend
+    (32.83548, -83.63627),  # corner near Lanier Park / US-41
+    (32.83386, -83.63808),  # zigzag, Rose Park's east edge
+    (32.83287, -83.63644),
+    (32.83147, -83.63761),
+    (32.83048, -83.63609),
+    (32.82919, -83.63765),  # Telfair St ∩ 1st St
+    (32.82456, -83.6429),   # Telfair St, south point (Beall's Hill)
+    (32.82527, -83.64353),
+    (32.82708, -83.64458),
+    (32.82909, -83.64562),
+    (32.83079, -83.64635),
+    (32.83229, -83.64666),  # Coleman Ave, near Tattnall Square
+    (32.83521, -83.64473),  # Forsyth St curve
+    (32.83815, -83.64313),
+    (32.84081, -83.64226),  # Hardeman Ave bend
+    (32.84129, -83.64004),  # Hardeman Ave ∩ Madison St, near Mercer Law School
+]
+
+
+def point_in_intown_boundary(lat, lng):
+    """Ray-casting point-in-polygon test against INTOWN_BOUNDARY."""
+    inside = False
+    n = len(INTOWN_BOUNDARY)
+    j = n - 1
+    for i in range(n):
+        yi, xi = INTOWN_BOUNDARY[i]
+        yj, xj = INTOWN_BOUNDARY[j]
+        if (yi > lat) != (yj > lat) and lng < (xj - xi) * (lat - yi) / (yj - yi) + xi:
+            inside = not inside
+        j = i
+    return inside
+
+
+def is_intown(a, lat=None, lng=None):
+    if lat is not None and lng is not None:
+        return point_in_intown_boundary(lat, lng)
     l = a.lower()
     return any(s in l for s in INTOWN)
 
@@ -476,7 +525,7 @@ def scrape_detail(post, outcomes_lookup=None, geocache=None):
             "applicant":     applicant,
             "status_note":   snote,
             "status":        status,
-            "intown":        is_intown(address),
+            "intown":        is_intown(address, lat, lng),
             "neighborhood":  neighborhood,
             "lat":           lat,
             "lng":           lng,
