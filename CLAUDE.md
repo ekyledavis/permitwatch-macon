@@ -42,10 +42,20 @@ way.
 no shared code between them:**
 
 1. **`src/App.jsx`** — the entire frontend UI (list/map/calendar/alerts
-   views) in one file, inline-styled, no CSS framework. The map is a
-   hand-drawn SVG (`MapView`), not a real map library, with hardcoded
-   road/river/neighborhood geometry calibrated to Macon's lat/lng bounds.
-   On mount it `fetch("/permitwatch_data.json")` for the permit list
+   views) in one file, inline-styled, no CSS framework. The map (`MapView`)
+   is a real Leaflet map over OpenStreetMap tiles (`leaflet` +
+   `react-leaflet`), not hand-drawn — it fits to the actual lat/lng extent of
+   the loaded permits on first render, supports native drag-to-pan and
+   scroll/pinch-to-zoom, and has an address-search box that calls
+   `/api/geocode` to drop a pin, fly the map there, and list the nearest
+   permits by haversine distance. The dashed "intown" boundary drawn on the
+   map (`INTOWN_BOUNDARY`) is only a visual approximation — a convex hull
+   over a handful of geocoded boundary-street points and neighborhood
+   centroids — because the actual intown determination
+   (`scraper/mbpz_scraper.py`'s `is_intown()`) is plain substring matching
+   against a street-name list, not a real polygon, so there's no
+   authoritative geometry to draw exactly. On mount it also
+   `fetch("/permitwatch_data.json")` for the permit list
    (falling back to a hardcoded `FALLBACK_DATA` array if that fails), then
    per-permit `fetch("/api/permit-activity?permitId=...&voterId=...")` for
    live comments/reactions. Voting/commenting POST to `/api/reactions` and
@@ -74,8 +84,13 @@ no shared code between them:**
      the caller's own reaction for one permit), `subscribe.js` (POST,
      geocode + upsert an alert subscription by email — see verification
      note below), `confirm.js` (GET, the link a subscriber clicks in
-     their confirmation email; renders a small HTML page, not JSON).
-   Any of these will 500 if `POSTGRES_URL`/`NILEDB_POSTGRES_URL` isn't set.
+     their confirmation email; renders a small HTML page, not JSON),
+     `geocode.js` (GET `?address=`, thin wrapper around `_geocode.js` for
+     the map tab's address-search box — the only one of these that doesn't
+     touch Postgres, but still rate-limited).
+   Any endpoint touching Postgres will 500 if `POSTGRES_URL`/
+   `NILEDB_POSTGRES_URL` isn't set; `geocode.js` doesn't need it but still
+   needs the rate-limit table, which does.
 
    **Subscriber email verification (double opt-in)**: `subscribe.js`
    never emails alerts to an address on the strength of a form submission

@@ -1,4 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { MapContainer, TileLayer, Marker, Popup, Polygon, useMap } from "react-leaflet";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
 
 const FALLBACK_DATA = [
   {
@@ -77,39 +80,114 @@ function formatCommentTime(iso){
 function getStatusConfig(status){
   return STATUS_CONFIG[status] || {color:"#9CA3AF",bg:"rgba(156,163,175,0.12)",dot:"#9CA3AF"};
 }
+function haversineMiles(lat1,lng1,lat2,lng2){
+  const R=3958.8;
+  const toRad=d=>d*Math.PI/180;
+  const dLat=toRad(lat2-lat1), dLng=toRad(lng2-lng1);
+  const a=Math.sin(dLat/2)**2 + Math.cos(toRad(lat1))*Math.cos(toRad(lat2))*Math.sin(dLng/2)**2;
+  return R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
+}
 
-// ── SVG Map ───────────────────────────────────────────────────────────────────
+// ── Map ───────────────────────────────────────────────────────────────────────
+// Approximate "intown" boundary — the scraper flags a permit intown purely by
+// matching its address against a street-name list (scraper/mbpz_scraper.py's
+// INTOWN), not a real polygon, so there's no authoritative geometry to draw.
+// This ring is a convex hull over real, geocoded points for that same street
+// list's boundary streets (Coleman Ave, Telfair St, Riverside Dr, ...) plus
+// the intown neighborhood centroids below — a visual approximation, not the
+// literal rule, but anchored to real streets on the OSM basemap instead of
+// hand-picked numbers.
+const INTOWN_BOUNDARY=[
+  [32.846,-83.661],   // Huguenin Heights
+  [32.857,-83.656],   // Ingleside
+  [32.860,-83.644],   // Cherokee Heights
+  [32.8364,-83.6194], // Riverside Dr, near the Ocmulgee River
+  [32.8253,-83.6426], // Telfair St
+  [32.8347,-83.6522], // Coleman Ave
+];
+const NEIGHBORHOODS=[
+  {n:"Vineville",lat:32.853,lng:-83.648,it:true},{n:"Ingleside",lat:32.857,lng:-83.656,it:true},
+  {n:"College Hill",lat:32.840,lng:-83.638,it:true},{n:"Beall's Hill",lat:32.844,lng:-83.645,it:true},
+  {n:"Huguenin Heights",lat:32.846,lng:-83.661,it:true},{n:"Shirley Hills",lat:32.832,lng:-83.689,it:false},
+  {n:"Downtown",lat:32.835,lng:-83.627,it:false},{n:"Midtown",lat:32.848,lng:-83.633,it:false},
+  {n:"Cherokee Heights",lat:32.860,lng:-83.644,it:true},
+];
+const MACON_CENTER=[32.8407,-83.6324];
+
+function markerIcon(app,isSel,isHov){
+  const sc=getStatusConfig(app.status);
+  const sz=isSel?30:isHov?26:22;
+  return L.divIcon({
+    className:"pw-marker",
+    html:`<div style="width:${sz}px;height:${sz}px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:${Math.round(sz*0.5)}px;background:${isSel?sc.dot:"#161921"};border:2px solid ${sc.dot};box-shadow:0 1px 5px rgba(0,0,0,.5)">${TYPE_ICONS[app.type]||"📄"}</div>`,
+    iconSize:[sz,sz],
+    iconAnchor:[sz/2,sz/2],
+    popupAnchor:[0,-sz/2],
+  });
+}
+const searchDivIcon=L.divIcon({
+  className:"pw-search-marker",
+  html:`<div style="width:22px;height:22px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:#4F6BFF;border:2px solid #7E9AFF;box-shadow:0 1px 5px rgba(0,0,0,.5)"></div>`,
+  iconSize:[22,22],
+  iconAnchor:[11,22],
+  popupAnchor:[0,-22],
+});
+
+// Fits the map to the data's real extent once, instead of a fixed hardcoded
+// viewport that clips most permits outside the historic core.
+function FitToData({apps}){
+  const map=useMap();
+  const didFit=useRef(false);
+  useEffect(()=>{
+    if(didFit.current)return;
+    const pts=apps.filter(a=>a.lat&&a.lng).map(a=>[a.lat,a.lng]);
+    if(pts.length){map.fitBounds(pts,{padding:[30,30],maxZoom:14});didFit.current=true;}
+  },[apps,map]);
+  return null;
+}
+function FlyToPin({pin}){
+  const map=useMap();
+  useEffect(()=>{if(pin)map.flyTo([pin.lat,pin.lng],15,{duration:1});},[pin,map]);
+  return null;
+}
+
 function MapView({apps,onSelect,selectedId,intownOnly}){
-  const [tooltip,setTooltip]=useState(null);
-  const W=860,H=500;
-  const LAT_MIN=32.82,LAT_MAX=32.87,LNG_MIN=-83.71,LNG_MAX=-83.61;
-  function proj(lat,lng){
-    return {x:((lng-LNG_MIN)/(LNG_MAX-LNG_MIN))*W, y:H-((lat-LAT_MIN)/(LAT_MAX-LAT_MIN))*H};
+  const [hoverId,setHoverId]=useState(null);
+  const [query,setQuery]=useState("");
+  const [pin,setPin]=useState(null);
+  const [searching,setSearching]=useState(false);
+  const [searchError,setSearchError]=useState("");
+
+  async function handleSearch(e){
+    e.preventDefault();
+    const address=query.trim();
+    if(!address)return;
+    setSearching(true);setSearchError("");
+    try{
+      const res=await fetch(`/api/geocode?address=${encodeURIComponent(address)}`);
+      const data=await res.json();
+      if(!res.ok||typeof data.lat!=="number"){setSearchError(data.error||"Couldn't find that address near Macon.");setPin(null);}
+      else setPin({lat:data.lat,lng:data.lng,label:address});
+    }catch{setSearchError("Search failed — check your connection and try again.");}
+    setSearching(false);
   }
-  const home=proj(32.851,-83.647);
-  const roads=[
-    {pts:[[32.82,-83.650],[32.87,-83.648]],w:2.8,c:"#252A42",lbl:"I-75"},
-    {pts:[[32.83,-83.71],[32.835,-83.61]],w:2.5,c:"#252A42",lbl:"I-16"},
-    {pts:[[32.82,-83.633],[32.87,-83.631]],w:1.8,c:"#1E2235",lbl:"Forsyth St / US-41"},
-    {pts:[[32.835,-83.630],[32.858,-83.653]],w:1.5,c:"#1E2235",lbl:"Vineville Ave"},
-    {pts:[[32.825,-83.700],[32.840,-83.680],[32.850,-83.660]],w:1.4,c:"#1E2235",lbl:"Riverside Dr"},
-    {pts:[[32.840,-83.625],[32.845,-83.660]],w:1.2,c:"#1E2235",lbl:"Napier Ave"},
-    {pts:[[32.850,-83.640],[32.858,-83.665]],w:1.2,c:"#1E2235",lbl:"Ingleside Ave"},
-    {pts:[[32.833,-83.625],[32.842,-83.648]],w:1.2,c:"#1E2235",lbl:"College St"},
-    {pts:[[32.833,-83.615],[32.833,-83.640]],w:1.4,c:"#1E2235",lbl:"Cherry St"},
-  ];
-  const ocmulgee=[[32.820,-83.710],[32.828,-83.700],[32.835,-83.692],[32.842,-83.681],[32.852,-83.668],[32.860,-83.660],[32.870,-83.655]];
-  const intownPoly=[[32.862,-83.638],[32.862,-83.625],[32.833,-83.622],[32.831,-83.635],[32.833,-83.648],[32.840,-83.665],[32.852,-83.668],[32.862,-83.655],[32.862,-83.638]];
-  const neighborhoods=[
-    {n:"Vineville",lat:32.853,lng:-83.648,it:true},{n:"Ingleside",lat:32.857,lng:-83.656,it:true},
-    {n:"College Hill",lat:32.840,lng:-83.638,it:true},{n:"Beall's Hill",lat:32.844,lng:-83.645,it:true},
-    {n:"Huguenin Hts",lat:32.846,lng:-83.661,it:true},{n:"Shirley Hills",lat:32.832,lng:-83.689,it:false},
-    {n:"Downtown",lat:32.835,lng:-83.627,it:false},{n:"Midtown",lat:32.848,lng:-83.633,it:false},
-    {n:"Cherokee Hts",lat:32.860,lng:-83.644,it:true},
-  ];
-  function polyPts(pts){return pts.map(([la,ln])=>{const p=proj(la,ln);return `${p.x},${p.y}`;}).join(" ");}
+
+  const nearby=pin?apps
+    .filter(a=>a.lat&&a.lng)
+    .map(a=>({...a,dist:haversineMiles(pin.lat,pin.lng,a.lat,a.lng)}))
+    .sort((a,b)=>a.dist-b.dist)
+    .slice(0,8):null;
+
   return(
     <div>
+      <form onSubmit={handleSearch} style={{display:"flex",gap:8,marginBottom:12}}>
+        <input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Find an address near Macon, e.g. 577 Cherry St"
+          style={{flex:1,background:"#161921",border:"1px solid #2A2E42",borderRadius:8,padding:"8px 12px",color:"#E8EAF0",fontSize:13}}/>
+        <button type="submit" className="btn btn-primary" disabled={searching}>{searching?"Searching…":"🔍 Find"}</button>
+        {pin&&<button type="button" className="btn btn-ghost" onClick={()=>{setPin(null);setQuery("");setSearchError("");}}>Clear</button>}
+      </form>
+      {searchError&&<div style={{color:"#EF4444",fontSize:12,marginBottom:10}}>{searchError}</div>}
+
       <div style={{display:"flex",alignItems:"center",gap:14,marginBottom:12,flexWrap:"wrap"}}>
         {Object.entries(STATUS_CONFIG).slice(0,4).map(([st,cfg])=>(
           <div key={st} style={{display:"flex",alignItems:"center",gap:5,fontSize:11,color:"#9CA3AF"}}>
@@ -117,60 +195,81 @@ function MapView({apps,onSelect,selectedId,intownOnly}){
           </div>
         ))}
         <div style={{marginLeft:"auto",display:"flex",alignItems:"center",gap:5,fontSize:11,color:"#6B7280"}}>
-          <div style={{width:9,height:9,borderRadius:"50%",background:"#4F6BFF",border:"2px solid #7E9AFF"}}/>Your Location
+          <div style={{width:9,height:9,borderRadius:"50% 50% 50% 0",background:"#4F6BFF",border:"2px solid #7E9AFF"}}/>Searched Address
         </div>
       </div>
-      <div style={{borderRadius:12,overflow:"hidden",border:"1px solid #1E2235",background:"#0D1018"}}>
-        <svg width="100%" viewBox={`0 0 ${W} ${H}`} style={{display:"block"}}>
-          <rect width={W} height={H} fill="#0D1018"/>
-          {Array.from({length:14}).map((_,i)=><line key={`gx${i}`} x1={i*(W/14)} y1={0} x2={i*(W/14)} y2={H} stroke="#12151E" strokeWidth={1}/>)}
-          {Array.from({length:10}).map((_,i)=><line key={`gy${i}`} x1={0} y1={i*(H/10)} x2={W} y2={i*(H/10)} stroke="#12151E" strokeWidth={1}/>)}
-          <polyline points={polyPts(ocmulgee)} fill="none" stroke="#1A3A5C" strokeWidth={8} strokeLinecap="round" strokeLinejoin="round" opacity={0.7}/>
-          <polyline points={polyPts(ocmulgee)} fill="none" stroke="#1E4A74" strokeWidth={4} strokeLinecap="round" strokeLinejoin="round" opacity={0.5}/>
-          {(()=>{const p=proj(32.838,-83.693);return <text x={p.x-10} y={p.y} fill="#1E4A74" fontSize={9} fontWeight={700} fontFamily="DM Sans,sans-serif" transform={`rotate(-30,${p.x-10},${p.y})`}>OCMULGEE RIVER</text>;})()} 
-          <polygon points={polyPts(intownPoly)} fill={intownOnly?"rgba(79,107,255,0.07)":"rgba(79,107,255,0.03)"} stroke="#4F6BFF" strokeWidth={intownOnly?1.5:0.8} strokeDasharray={intownOnly?"7 4":"4 4"} opacity={intownOnly?1:0.5}/>
-          {(()=>{const p=proj(32.831,-83.649);return <><circle cx={p.x} cy={p.y} r={28} fill="rgba(16,185,129,0.06)" stroke="rgba(16,185,129,0.2)" strokeWidth={0.8}/><text x={p.x} y={p.y+3} fill="#164030" fontSize={8} textAnchor="middle" fontFamily="DM Sans,sans-serif" fontWeight={700}>MERCER</text></>;})()} 
-          {(()=>{const p=proj(32.862,-83.669);return <><circle cx={p.x} cy={p.y} r={18} fill="rgba(16,185,129,0.05)" stroke="rgba(16,185,129,0.15)" strokeWidth={0.8}/><text x={p.x} y={p.y+3} fill="#164030" fontSize={7.5} textAnchor="middle" fontFamily="DM Sans,sans-serif" fontWeight={700}>WESLEYAN</text></>;})()} 
-          {roads.map((r,i)=>{const pts=r.pts.map(([la,ln])=>{const p=proj(la,ln);return `${p.x},${p.y}`;}).join(" ");return <polyline key={i} points={pts} fill="none" stroke={r.c} strokeWidth={r.w} strokeLinecap="round" strokeLinejoin="round"/>;})}
-          {roads.filter(r=>r.lbl).map((r,i)=>{const mid=r.pts[Math.floor(r.pts.length/2)];const p=proj(mid[0],mid[1]);return <text key={i} x={p.x} y={p.y-5} fill="#2A3050" fontSize={8} textAnchor="middle" fontFamily="DM Sans,sans-serif" fontWeight={600}>{r.lbl}</text>;})}
-          {neighborhoods.map(n=>{const p=proj(n.lat,n.lng);return <text key={n.n} x={p.x} y={p.y} fill={n.it?"#272F5A":"#1A1F30"} fontSize={9} textAnchor="middle" fontFamily="DM Sans,sans-serif" fontWeight={700} letterSpacing={0.4}>{n.n.toUpperCase()}</text>;})}
-          <circle cx={home.x} cy={home.y} r={40} fill="none" stroke="rgba(79,107,255,0.13)" strokeWidth={1} strokeDasharray="3 3"/>
-          <circle cx={home.x} cy={home.y} r={78} fill="none" stroke="rgba(79,107,255,0.07)" strokeWidth={1} strokeDasharray="3 3"/>
-          {apps.map(app=>{
-            if(!app.lat||!app.lng)return null;
-            const p=proj(app.lat,app.lng);
-            const sc=getStatusConfig(app.status);
-            const isHov=tooltip?.app?.id===app.id;
-            const isSel=selectedId===app.id;
-            const sz=isSel?14:isHov?12:10;
-            return(
-              <g key={app.id} style={{cursor:"pointer"}}
-                onMouseEnter={()=>setTooltip({app,x:p.x,y:p.y})}
-                onMouseLeave={()=>setTooltip(null)}
-                onClick={()=>onSelect(app)}>
-                {(isSel||isHov)&&<circle cx={p.x} cy={p.y} r={sz+7} fill={sc.bg} stroke={sc.dot} strokeWidth={1} opacity={0.7}/>}
-                <circle cx={p.x} cy={p.y} r={sz} fill={isSel?sc.dot:"#161921"} stroke={sc.dot} strokeWidth={isSel?0:2}/>
-                <text x={p.x} y={p.y+4.5} textAnchor="middle" fontSize={isSel?11:9} style={{userSelect:"none"}}>{TYPE_ICONS[app.type]||"📄"}</text>
-              </g>
-            );
-          })}
-          <circle cx={home.x} cy={home.y} r={9} fill="#4F6BFF" stroke="#7E9AFF" strokeWidth={2}/>
-          <text x={home.x} y={home.y+4} textAnchor="middle" fontSize={9}>🏠</text>
-          {tooltip&&(()=>{
-            const {app,x,y}=tooltip;const sc=getStatusConfig(app.status);
-            const tx=Math.min(x+14,W-198);const ty=Math.max(y-72,10);
-            return(
-              <g>
-                <rect x={tx} y={ty} width={192} height={70} rx={8} fill="#161921" stroke="#2A2E42" strokeWidth={1}/>
-                <text x={tx+10} y={ty+18} fill="#E8EAF0" fontSize={12} fontWeight={700} fontFamily="DM Sans">{app.address}</text>
-                <text x={tx+10} y={ty+33} fill="#6B7280" fontSize={10} fontFamily="DM Sans">{app.neighborhood} · {app.type}</text>
-                <circle cx={tx+11} cy={ty+51} r={4} fill={sc.dot}/>
-                <text x={tx+20} y={ty+55} fill={sc.color} fontSize={10} fontWeight={600} fontFamily="DM Sans">{app.status}</text>
-              </g>
-            );
-          })()}
-        </svg>
+
+      <div style={{borderRadius:12,overflow:"hidden",border:"1px solid #1E2235",height:520}}>
+        <MapContainer center={MACON_CENTER} zoom={13} scrollWheelZoom={true} style={{height:"100%",width:"100%",background:"#0D1018"}}>
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          <FitToData apps={apps}/>
+          <FlyToPin pin={pin}/>
+          <Polygon positions={INTOWN_BOUNDARY} pathOptions={{
+            color:"#4F6BFF",
+            weight:intownOnly?2:1,
+            dashArray:intownOnly?"7 4":"4 4",
+            fillOpacity:intownOnly?0.08:0.03,
+            opacity:intownOnly?1:0.5,
+          }}/>
+          {NEIGHBORHOODS.map(n=>(
+            <Marker key={n.n} position={[n.lat,n.lng]} icon={L.divIcon({
+              className:"pw-label",
+              html:`<div style="transform:translate(-50%,-50%);color:${n.it?"#7E9AFF":"#4A5068"};font:700 10px 'DM Sans',sans-serif;letter-spacing:.4px;white-space:nowrap;text-shadow:0 1px 3px #0D1018,0 0 8px #0D1018">${n.n.toUpperCase()}</div>`,
+              iconSize:[0,0],
+            })} interactive={false}/>
+          ))}
+          {apps.filter(a=>a.lat&&a.lng).map(app=>(
+            <Marker key={app.id} position={[app.lat,app.lng]}
+              icon={markerIcon(app,selectedId===app.id,hoverId===app.id)}
+              eventHandlers={{
+                click:()=>onSelect(app),
+                mouseover:()=>setHoverId(app.id),
+                mouseout:()=>setHoverId(null),
+              }}>
+              <Popup>
+                <b>{app.address}</b><br/>
+                {app.neighborhood} · {app.type}<br/>
+                {app.status}
+              </Popup>
+            </Marker>
+          ))}
+          {pin&&(
+            <Marker position={[pin.lat,pin.lng]} icon={searchDivIcon}>
+              <Popup>{pin.label}</Popup>
+            </Marker>
+          )}
+        </MapContainer>
       </div>
+
+      {nearby&&(
+        <div style={{marginTop:12}}>
+          <div style={{fontSize:11,color:"#6B7280",fontWeight:600,textTransform:"uppercase",letterSpacing:".6px",marginBottom:6}}>
+            Nearest permits to "{pin.label}"
+          </div>
+          <div style={{display:"flex",flexDirection:"column",gap:6}}>
+            {nearby.map(app=>{
+              const sc=getStatusConfig(app.status);
+              return(
+                <div key={app.id} className={`mlc ${selectedId===app.id?"sel":""}`} onClick={()=>onSelect(app)}
+                  style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:8}}>
+                  <div style={{display:"flex",alignItems:"center",gap:8,minWidth:0}}>
+                    <span>{TYPE_ICONS[app.type]||"📄"}</span>
+                    <span style={{fontSize:13,fontWeight:600,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{app.address}</span>
+                  </div>
+                  <div style={{display:"flex",alignItems:"center",gap:8,flexShrink:0}}>
+                    <span style={{background:sc.bg,color:sc.color,borderRadius:20,padding:"2px 8px",fontSize:10,fontWeight:600}}>{app.status}</span>
+                    <span style={{fontSize:11,color:"#6B7280"}}>{app.dist.toFixed(2)} mi</span>
+                  </div>
+                </div>
+              );
+            })}
+            {nearby.length===0&&<div style={{color:"#4A5068",fontSize:13}}>No permits with coordinates match the current filters.</div>}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
