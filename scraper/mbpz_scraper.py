@@ -24,7 +24,7 @@ HEADERS = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleW
 INTOWN = [
     # Boundary streets
     "coleman ave", "telfair st", "spring st", "new st",
-    "riverside dr", "madison st", "hardiman ave", "monroe st",
+    "riverside dr", "madison st", "hardeman ave", "monroe st",
     "forsyth st",
 
     # Coleman Hill (Zone 1)
