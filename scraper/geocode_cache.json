@@ -1303,5 +1303,55 @@
     "neighborhood": "South Macon",
     "lat": null,
     "lng": null
+  },
+  "2670 stanislaus cir": {
+    "neighborhood": "Macon",
+    "lat": 32.8445277,
+    "lng": -83.6659892
+  },
+  "2870 vineville ave": {
+    "neighborhood": "Payne",
+    "lat": 32.8468908,
+    "lng": -83.6688353
+  },
+  "220 oak haven ave": {
+    "neighborhood": "Macon",
+    "lat": 32.8441901,
+    "lng": -83.6588407
+  },
+  "2038 vineville ave": {
+    "neighborhood": "Vineville",
+    "lat": 32.84293,
+    "lng": -83.651608
+  },
+  "242/ 248 spring st": {
+    "neighborhood": "Midtown Macon",
+    "lat": 32.8456187,
+    "lng": -83.6284141
+  },
+  "3964 elnora dr": {
+    "neighborhood": "McKibben Lane",
+    "lat": 32.9038622,
+    "lng": -83.6938015
+  },
+  "3106 hillcrest ave": {
+    "neighborhood": "Villa Crest",
+    "lat": 32.8392652,
+    "lng": -83.6745168
+  },
+  "461 pursley st": {
+    "neighborhood": "Macon",
+    "lat": 32.842776,
+    "lng": -83.64762
+  },
+  "2695, 2689, 2675 waterville rd, 221 & 231 spikes st, 2686 & 2674 texas st": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "208, 226, 230, 242, 246 pittman st and 2661 waterville rd": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
   }
 }
