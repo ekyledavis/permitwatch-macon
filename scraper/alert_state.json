@@ -60,7 +60,7 @@
     "hearing_reminded": true
   },
   "MBPZ-2026-09-14-Q073-0418": {
-    "status": "Under Review",
+    "status": "Decision Issued",
     "hearing_reminded": true
   },
   "MBPZ-2026-09-14-Q074-0407": {
@@ -68,11 +68,11 @@
     "hearing_reminded": true
   },
   "MBPZ-2026-09-14-R073-0364": {
-    "status": "Under Review",
+    "status": "Decision Issued",
     "hearing_reminded": true
   },
   "MBPZ-2026-09-14-R082-0003": {
-    "status": "Under Review",
+    "status": "Decision Issued",
     "hearing_reminded": true
   },
   "MBPZ-2026-09-14-O072-0119": {
@@ -80,67 +80,67 @@
     "hearing_reminded": true
   },
   "MBPZ-2026-09-14-O072-0201": {
-    "status": "Under Review",
+    "status": "Decision Issued",
     "hearing_reminded": true
   },
   "MBPZ-2026-09-14-H005-0008": {
-    "status": "Under Review",
+    "status": "Decision Issued",
     "hearing_reminded": true
   },
   "MBPZ-2026-09-14-M091-0177": {
-    "status": "Under Review",
+    "status": "Decision Issued",
     "hearing_reminded": true
   },
   "MBPZ-2026-09-14-N082-0370": {
-    "status": "Under Review",
+    "status": "Decision Issued",
     "hearing_reminded": true
   },
   "MBPZ-2026-09-14-R064-0103": {
-    "status": "Under Review",
+    "status": "Decision Issued",
     "hearing_reminded": true
   },
   "MBPZ-2026-09-14-S071-0522": {
-    "status": "Under Review",
+    "status": "Decision Issued",
     "hearing_reminded": true
   },
   "MBPZ-2026-09-14-V073-0149": {
-    "status": "Under Review",
+    "status": "Decision Issued",
     "hearing_reminded": true
   },
   "MBPZ-2026-09-14-R073-0317": {
-    "status": "Under Review",
+    "status": "Decision Issued",
     "hearing_reminded": true
   },
   "MBPZ-2026-09-14-J005-0081": {
-    "status": "Under Review",
+    "status": "Decision Issued",
     "hearing_reminded": true
   },
   "MBPZ-2026-09-14-M044-0188": {
-    "status": "Under Review",
+    "status": "Decision Issued",
     "hearing_reminded": true
   },
   "MBPZ-2026-09-14-Q091-0012": {
-    "status": "Under Review",
+    "status": "Decision Issued",
     "hearing_reminded": true
   },
   "MBPZ-2026-09-14-Q091-0258": {
-    "status": "Under Review",
+    "status": "Decision Issued",
     "hearing_reminded": true
   },
   "MBPZ-2026-09-14-Q091-0260": {
-    "status": "Under Review",
+    "status": "Decision Issued",
     "hearing_reminded": true
   },
   "MBPZ-2026-09-14-Q091-0353": {
-    "status": "Under Review",
+    "status": "Decision Issued",
     "hearing_reminded": true
   },
   "MBPZ-2026-09-14-Q091-0363": {
-    "status": "Under Review",
+    "status": "Decision Issued",
     "hearing_reminded": true
   },
   "MBPZ-2026-09-14-W070-0003": {
-    "status": "Under Review",
+    "status": "Decision Issued",
     "hearing_reminded": true
   },
   "MBPZ-2026-09-08-Q074-0407": {
@@ -1517,6 +1517,42 @@
   },
   "MBPZ-2026-10-12-Q092-0038": {
     "status": "Pending Hearing",
+    "hearing_reminded": false
+  },
+  "MBPZ-2026-09-21-O072-0138": {
+    "status": "Under Review",
+    "hearing_reminded": false
+  },
+  "MBPZ-2026-09-21-Q074-0172": {
+    "status": "Under Review",
+    "hearing_reminded": false
+  },
+  "MBPZ-2026-09-21-Q074-0171": {
+    "status": "Under Review",
+    "hearing_reminded": false
+  },
+  "MBPZ-2026-09-21-Q074-0603": {
+    "status": "Under Review",
+    "hearing_reminded": false
+  },
+  "MBPZ-2026-09-21-P071-0244": {
+    "status": "Under Review",
+    "hearing_reminded": false
+  },
+  "MBPZ-2026-09-21-Q081-0785": {
+    "status": "Under Review",
+    "hearing_reminded": false
+  },
+  "MBPZ-2026-09-21-O072-0085": {
+    "status": "Under Review",
+    "hearing_reminded": false
+  },
+  "MBPZ-2026-09-21-O072-0295": {
+    "status": "Under Review",
+    "hearing_reminded": false
+  },
+  "MBPZ-2026-09-21-Q073-0308": {
+    "status": "Under Review",
     "hearing_reminded": false
   }
 }
