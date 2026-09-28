@@ -721,7 +721,11 @@
   "4900 nowell ct": "RPCUS",
   "840 riverside dr": "Riverside",
   "140 buford pl": "Riverside Hills",
-  "1194 forsyth st": "Midtown Macon",
+  "1194 forsyth st": {
+    "neighborhood": "Midtown Macon",
+    "lat": 32.8360927,
+    "lng": -83.6402298
+  },
   "2764 cherokee ave": "Cherokee Heights",
   "5435 houston rd": "Bevinwood",
   "5189, 5211 & 5251 sardis church rd": "Macon",
@@ -1350,6 +1354,56 @@
     "lng": null
   },
   "208, 226, 230, 242, 246 pittman st and 2661 waterville rd": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "111 buford pl": {
+    "neighborhood": "Macon",
+    "lat": 32.8466451,
+    "lng": -83.6593289
+  },
+  "2148 vineville ave": {
+    "neighborhood": "Vineville",
+    "lat": 32.8443548,
+    "lng": -83.65386
+  },
+  "552 d t walton sr way": {
+    "neighborhood": "Macon",
+    "lat": 32.8358393,
+    "lng": -83.6337428
+  },
+  "863 edgewood ave": {
+    "neighborhood": "Macon",
+    "lat": 32.8260645,
+    "lng": -83.6431314
+  },
+  "484 mulberry st": {
+    "neighborhood": "Downtown Macon",
+    "lat": 32.8368893,
+    "lng": -83.6258222
+  },
+  "315 poplar st": {
+    "neighborhood": "Downtown Macon",
+    "lat": 32.8326797,
+    "lng": -83.6256564
+  },
+  "4201 fairfax dr": {
+    "neighborhood": "Groveland Park",
+    "lat": 32.786017,
+    "lng": -83.697444
+  },
+  "370 cherry st": {
+    "neighborhood": "Downtown Macon",
+    "lat": 32.8342217,
+    "lng": -83.6256931
+  },
+  "2730 & 2740 texas st": {
+    "neighborhood": "Macon",
+    "lat": 32.8116192,
+    "lng": -83.6373602
+  },
+  "256, 264, 272, 284, 290, 294 spikes st": {
     "neighborhood": "Macon",
     "lat": null,
     "lng": null
