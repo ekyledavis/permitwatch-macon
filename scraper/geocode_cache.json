@@ -1407,5 +1407,100 @@
     "neighborhood": "Macon",
     "lat": null,
     "lng": null
+  },
+  "230 calloway dr": {
+    "neighborhood": "Macon",
+    "lat": 32.8497163,
+    "lng": -83.6583787
+  },
+  "555 first st": {
+    "neighborhood": "Downtown Macon",
+    "lat": null,
+    "lng": null
+  },
+  "904 orange terr": {
+    "neighborhood": "Macon",
+    "lat": 32.83335,
+    "lng": -83.6387851
+  },
+  "985 martin luther king jr blvd": {
+    "neighborhood": "Macon",
+    "lat": 32.8300312,
+    "lng": -83.6299691
+  },
+  "241 third st": {
+    "neighborhood": "Downtown Macon",
+    "lat": null,
+    "lng": null
+  },
+  "571 cherry st": {
+    "neighborhood": "Downtown Macon",
+    "lat": 32.8364028,
+    "lng": -83.6285169
+  },
+  "563 cherry st": {
+    "neighborhood": "Downtown Macon",
+    "lat": 32.8363513,
+    "lng": -83.6284246
+  },
+  "6369 thomaston rd": {
+    "neighborhood": "Trails End",
+    "lat": 32.8522716,
+    "lng": -83.7679538
+  },
+  "1448 bass rd": {
+    "neighborhood": "Woodcrest",
+    "lat": 32.9235898,
+    "lng": -83.7397238
+  },
+  "3773 / 3769 bloomfield rd": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "2710 napier ave": {
+    "neighborhood": "Azalea Park",
+    "lat": 32.8360617,
+    "lng": -83.6659292
+  },
+  "428 second st": {
+    "neighborhood": "Downtown Macon",
+    "lat": null,
+    "lng": null
+  },
+  "2351 hubbard rd": {
+    "neighborhood": "Macon",
+    "lat": 32.8212041,
+    "lng": -83.5635867
+  },
+  "4747 donnan rd": {
+    "neighborhood": "Macon",
+    "lat": 32.8347509,
+    "lng": -83.5074875
+  },
+  "297, 287, 281, 257 spikes street": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "347, 341, 333, 323, 317, 311, 305 spikes st": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "379, 361, 353 spikes st": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "242 spring st": {
+    "neighborhood": "Midtown Macon",
+    "lat": 32.8414835,
+    "lng": -83.6318261
+  },
+  "440 hemlock st": {
+    "neighborhood": "Macon",
+    "lat": 32.8328941,
+    "lng": -83.6360238
   }
 }
