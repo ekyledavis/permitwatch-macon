@@ -1556,51 +1556,51 @@
     "hearing_reminded": false
   },
   "MBPZ-2026-10-26-P071-0295": {
-    "status": "Pending Hearing",
+    "status": "Under Review",
     "hearing_reminded": false
   },
   "MBPZ-2026-10-26-P071-0689": {
-    "status": "Pending Hearing",
+    "status": "Under Review",
     "hearing_reminded": false
   },
   "MBPZ-2026-10-26-Q073-0519": {
-    "status": "Pending Hearing",
+    "status": "Under Review",
     "hearing_reminded": false
   },
   "MBPZ-2026-10-26-Q074-0410": {
-    "status": "Pending Hearing",
+    "status": "Under Review",
     "hearing_reminded": false
   },
   "MBPZ-2026-10-26-Q074-0459": {
-    "status": "Pending Hearing",
+    "status": "Under Review",
     "hearing_reminded": false
   },
   "MBPZ-2026-10-26-Q081-0582": {
-    "status": "Pending Hearing",
+    "status": "Under Review",
     "hearing_reminded": false
   },
   "MBPZ-2026-10-26-R073-0296": {
-    "status": "Pending Hearing",
+    "status": "Under Review",
     "hearing_reminded": false
   },
   "MBPZ-2026-10-26-R081-0039": {
-    "status": "Pending Hearing",
+    "status": "Under Review",
     "hearing_reminded": false
   },
   "MBPZ-2026-10-26-M102-0005": {
-    "status": "Pending Hearing",
+    "status": "Under Review",
     "hearing_reminded": false
   },
   "MBPZ-2026-10-26-R073-0316": {
-    "status": "Pending Hearing",
+    "status": "Under Review",
     "hearing_reminded": false
   },
   "MBPZ-2026-10-26-Q092-0023": {
-    "status": "Pending Hearing",
+    "status": "Under Review",
     "hearing_reminded": false
   },
   "MBPZ-2026-10-26-Q092-0027": {
-    "status": "Pending Hearing",
+    "status": "Under Review",
     "hearing_reminded": false
   },
   "MBPZ-2026-09-28-Q073-0099": {
@@ -1749,6 +1749,22 @@
   },
   "MBPZ-2026-10-12-Q082-0478": {
     "status": "Decision Issued",
+    "hearing_reminded": false
+  },
+  "MBPZ-2026-10-26-O054-0150": {
+    "status": "Under Review",
+    "hearing_reminded": false
+  },
+  "MBPZ-2026-10-26-W070-0003": {
+    "status": "Under Review",
+    "hearing_reminded": false
+  },
+  "MBPZ-2026-10-26-O072-0295": {
+    "status": "Under Review",
+    "hearing_reminded": false
+  },
+  "MBPZ-2026-10-26-P074-0083": {
+    "status": "Under Review",
     "hearing_reminded": false
   }
 }
