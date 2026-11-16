@@ -742,7 +742,11 @@
   "186 hines terr": "Riverside Hills",
   "964 park pl": "Macon",
   "311 first st & 732 mulberry st": "Downtown Macon",
-  "100 cattlemens dr": "Macon",
+  "100 cattlemens dr": {
+    "neighborhood": "Macon",
+    "lat": 32.822943,
+    "lng": -83.733625
+  },
   "4690 forsyth rd": "Idle Hour Estates",
   "2525 second st": "Downtown Macon",
   "1023 riverside dr": "Riverside",
@@ -1502,5 +1506,100 @@
     "neighborhood": "Macon",
     "lat": 32.8328941,
     "lng": -83.6360238
+  },
+  "2631 suwanee ave": {
+    "neighborhood": "Macon",
+    "lat": 32.8399355,
+    "lng": -83.6632118
+  },
+  "131 buford pl": {
+    "neighborhood": "Macon",
+    "lat": 32.8471553,
+    "lng": -83.6593766
+  },
+  "264 college st": {
+    "neighborhood": "College Hill",
+    "lat": 32.84357,
+    "lng": -83.6370211
+  },
+  "294 college st": {
+    "neighborhood": "College Hill",
+    "lat": 32.843285,
+    "lng": -83.6371445
+  },
+  "332 new st": {
+    "neighborhood": "Downtown Macon",
+    "lat": 32.8388582,
+    "lng": -83.6318473
+  },
+  "651 martin luther king jr blvd": {
+    "neighborhood": "Macon",
+    "lat": 32.8300312,
+    "lng": -83.6299691
+  },
+  "5581 zebulon rd": {
+    "neighborhood": "Castlegate",
+    "lat": 32.8797625,
+    "lng": -83.7449727
+  },
+  "5020 mercer university dr & 109 west macon park dr": {
+    "neighborhood": "North Macon",
+    "lat": null,
+    "lng": null
+  },
+  "189 & 181 woodfield dr": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "1575 forest hill rd": {
+    "neighborhood": "McKibben Lane",
+    "lat": 32.8973317,
+    "lng": -83.7023958
+  },
+  "2746 riverside dr": {
+    "neighborhood": "Riverview",
+    "lat": 32.877313,
+    "lng": -83.6660563
+  },
+  "2270 shurling dr": {
+    "neighborhood": "Macon",
+    "lat": 32.8657398,
+    "lng": -83.5843478
+  },
+  "3075 mercer university dr": {
+    "neighborhood": "North Macon",
+    "lat": 32.8262186,
+    "lng": -83.6749877
+  },
+  "4460 north mumford rd": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "735 pierce ave": {
+    "neighborhood": "Northwoods",
+    "lat": 32.8687606,
+    "lng": -83.6622199
+  },
+  "3221 broadway": {
+    "neighborhood": "South Macon",
+    "lat": 32.8041687,
+    "lng": -83.6405947
+  },
+  "2706, 2716, 2724 stevens st, 334, 322, 308 spikes st": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "2736, 2740, 2744 stevens st and 2743, 2737, 2731, 2725 toombs st": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
+  },
+  "216, 228, 244 spikes st": {
+    "neighborhood": "Macon",
+    "lat": null,
+    "lng": null
   }
 }
